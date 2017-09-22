@@ -14,4 +14,6 @@ public class BenzCar implements Car {
     public void getCarNation() {
         System.out.println("my nation is www.baidu.com");
     }
+
+
 }

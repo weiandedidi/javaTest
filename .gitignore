@@ -9,4 +9,4 @@ atlassian-ide-plugin.xml
 .gradletasknamecache
 
 #target
-target/
+/wms/target/

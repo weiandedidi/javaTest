@@ -1,7 +1,7 @@
 package design.factory.reflectionFactory;
 
 /**
- * car 抽象产品类，定义获取产品
+` * car 鎶借薄浜у搧绫伙紝瀹氫箟鑾峰彇浜у搧
  * Created with IntelliJ IDEA.
  * User: qidima
  * Date: 2017/9/22
@@ -9,12 +9,12 @@ package design.factory.reflectionFactory;
  */
 public interface Car {
     /**
-     * 获取车的名字
+     * 鑾峰彇杞︾殑鍚嶅瓧
      */
     public void getCarName();
 
     /**
-     * 获取车的国家
+     * 鑾峰彇杞︾殑鍥藉
      */
     public void getCarNation();
 }

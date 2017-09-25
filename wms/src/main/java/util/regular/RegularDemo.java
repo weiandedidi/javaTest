@@ -11,5 +11,9 @@ public class RegularDemo {
         Pattern pattern = Pattern.compile(regix);
         Pattern s = Pattern.compile("$1");
         String json = "/news_ying_1.json";
+        //language=HTML
+        String aaa = "<html><body><content><meter></meter></content></body></html>";
+        String sql = "SELECT * FROM sc_car WHERE NAME = 'hah'";
+
     }
 }

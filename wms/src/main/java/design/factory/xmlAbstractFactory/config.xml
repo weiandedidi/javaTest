@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<!--此处的class必须为完整的包路径，否则找不到-->
+<config>
+    <className>design.factory.xmlAbstractFactory.SpringSkinFactory</className>
+</config>

@@ -2,6 +2,7 @@ package design.singleton;
 
 /**
  * 静态内部类，单例模式
+ * 推荐使用
  * 单例类中增加一个静态(static)内部类，在该内部类中创建单例对象，再将该单例对象通过getInstance()方法返回给外部使用
  * Created with IntelliJ IDEA.
  * User: qidima

@@ -13,7 +13,7 @@ public class Client {
         Button bt;
         TextField tf;
         ComboBox cb;
-        factory = (SkinFactory)XmlUtil.getBean();
+        factory = (SkinFactory)XmlUtil.getBeanByFilePath("C:\\Users\\qidima\\IdeaProjects\\ma\\wms\\src\\main\\java\\design\\factory\\xmlAbstractFactory\\config.xml");
         bt = factory.createButton();
         tf = factory.createTextField();
         cb = factory.createComboBox();

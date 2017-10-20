@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--此处的class必须为完整的包路径，否则找不到-->
+<config>
+    <document>
+        <type>reaserch</type>
+        <className>design.prototype.appDemo.ReaserchDocument</className>
+    </document>
+    <document>
+        <type>report</type>
+        <className>design.prototype.appDemo.ReportDocument</className>
+    </document>
+</config>

@@ -1,4 +1,4 @@
-package design.factory.xmlAbstractFactory;
+package design.prototype.appDemo;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -8,11 +8,10 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-
-import design.factory.xmlAbstractFactory.SpringSkinFactory;
-
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 操作xml的工具类，方便用户配置
@@ -31,12 +30,18 @@ public class XmlUtil {
             Document document = builder.parse(new File(filePath));
             //获取节点
             NodeList nodeList = document.getElementsByTagName("className");
-            Node node = nodeList.item(0).getFirstChild();
-            String className = node.getNodeValue();
-            //通过类名生成实例对象并将其返回
-            Class c = Class.forName(className);
-            Object obj = c.newInstance();
-            return obj;
+            //第一层的全部节点
+            List<Object> nameList = new ArrayList<Object>();
+            //获取全部的value的值
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                Node node = nodeList.item(i).getFirstChild();
+
+                //通过类名生成实例对象并将其返回
+                Class c = Class.forName(node.getNodeValue());
+                Object obj = c.newInstance();
+                nameList.add(obj);
+            }
+            return nameList;
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
             return null;

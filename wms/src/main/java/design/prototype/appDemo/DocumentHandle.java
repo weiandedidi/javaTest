@@ -20,7 +20,7 @@ class DocumentHandle {
 
     //读取配置 塞入hashtable中
     private DocumentHandle() {
-        List<DocumentTemplet> templetList = (List<DocumentTemplet>) XmlUtil.getBeanByFilePath("C:\\Users\\qidima\\IdeaProjects\\ma\\wms\\src\\main\\java\\design\\prototype\\appDemo\\config.xml");
+        List<DocumentTemplet> templetList = (List<DocumentTemplet>) XmlUtil.getBeanByFilePath("D:\\work\\javaTest\\wms\\src\\main\\java\\design\\prototype\\appDemo\\config.xml");
 //        List<DocumentTemplet> templetList = (List<DocumentTemplet>) XmlUtil.getBeanByFilePath("design/prototype/appDemo/config.xml");     linux
         for (DocumentTemplet templet : templetList) {
             hashtable.put(templet.getClass().getName(), templet);

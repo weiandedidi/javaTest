@@ -1,0 +1,5 @@
+{
+  "hero": "design.builder.simple.HeroBuilder",
+  "angel": "design.builder.simple.AngelBuilder",
+  "devil":"design.builder.simple.DevilBuilder"
+}

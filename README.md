@@ -5,10 +5,15 @@ javaTest
 ----------------
 
 ### 1.设计模式  design
-####1.1 工厂方法
+####1.1 工厂方法 (factory)
 ##### 1.1.1 简单工厂
 ##### 1.1.2 简单工厂+ 类反射 reflectionFactory
 ##### 1.1.3 工厂方法
+#### 1.2 单例 (singleton)
+#### 1.3 原型 (prototype)
+#### 1.4 建造者 (builder)
+
+
 
 ### 2.数据结构  dataStructure
 

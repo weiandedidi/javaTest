@@ -1,5 +1,7 @@
 package design.prototype.appDemo;
 
+import util.XmlUtil;
+
 import java.io.File;
 import java.util.Hashtable;
 import java.util.List;

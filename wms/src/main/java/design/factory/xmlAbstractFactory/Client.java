@@ -1,5 +1,7 @@
 package design.factory.xmlAbstractFactory;
 
+import util.XmlUtil;
+
 /**
  * Created with IntelliJ IDEA.
  * User: qidima
@@ -13,7 +15,7 @@ public class Client {
         Button bt;
         TextField tf;
         ComboBox cb;
-        factory = (SkinFactory)XmlUtil.getBeanByFilePath("C:\\Users\\qidima\\IdeaProjects\\ma\\wms\\src\\main\\java\\design\\factory\\xmlAbstractFactory\\config.xml");
+        factory = (SkinFactory) XmlUtil.getBeanByFilePath("D:\\work\\javaTest\\wms\\src\\main\\java\\design\\factory\\xmlAbstractFactory\\config.xml");
         bt = factory.createButton();
         tf = factory.createTextField();
         cb = factory.createComboBox();

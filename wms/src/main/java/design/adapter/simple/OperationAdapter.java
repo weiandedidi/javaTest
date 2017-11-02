@@ -1,15 +1,15 @@
 package design.adapter.simple;
 
 /**
- * ²Ù×÷ÊÊÅäÆ÷£ºÊÊÅäÆ÷
+ * æ“ä½œé€‚é…å™¨ï¼šé€‚é…å™¨
  * Created with IntelliJ IDEA.
  * User: qidima
  * Date: 2017/10/31
  * Time: 16:42
  */
 public class OperationAdapter implements ScoreOperation {
-    private QuickSort sortObj; //¶¨ÒåÊÊÅäÕßQuickSort¶ÔÏó
-    private BinarySearch searchObj; //¶¨ÒåÊÊÅäÕßBinarySearch¶ÔÏó
+    private QuickSort sortObj; //å®šä¹‰é€‚é…è€…QuickSortå¯¹è±¡
+    private BinarySearch searchObj; //å®šä¹‰é€‚é…è€…BinarySearchå¯¹è±¡
 
     public OperationAdapter() {
         sortObj = new QuickSort();

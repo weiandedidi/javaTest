@@ -1,8 +1,8 @@
 package design.adapter.simple;
 
 /**
- * ¶þ·Ö²éÕÒÊÊÅäÕß
- * ¶þ·Ö·¨ÊÊºÏÓÐÐòÅÅÁÐ
+ * ï¿½ï¿½ï¿½Ö²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ï¿½Ö·ï¿½ï¿½Êºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * Created with IntelliJ IDEA.
  * User: qidima
  * Date: 2017/10/31
@@ -23,9 +23,9 @@ public class BinarySearch {
                 high = mid -1;
             }
             else {
-                return 1; //ÕÒµ½ÔªËØ·µ»Ø1
+                return 1; //æ‰¾åˆ°å…ƒç´ è¿”å›ž1
             }
         }
-        return -1;  //Î´ÕÒµ½ÔªËØ·µ»Ø-1
+        return -1;  //æœªæ‰¾åˆ°å…ƒç´ è¿”å›ž-1
     }
 }

@@ -1,7 +1,7 @@
 package design.adapter.simple;
 
 /**
- * ¿ìËÙÅÅĞòÊÊÅäÕß
+ * å¿«é€Ÿæ’åºé€‚é…è€…
  * Created with IntelliJ IDEA.
  * User: qidima
  * Date: 2017/10/31
@@ -10,15 +10,15 @@ package design.adapter.simple;
 public class QuickSort {
 
     /**
-     * ¿ìËÙÅÅĞò
+     * å¿«é€Ÿæ’åº
      *
      * @param array
-     * @param startIndex ×óÃæµÄ×ø±ê
-     * @param endIndex   ÓÒÃæµÄ×ø±ê
+     * @param startIndex å·¦é¢çš„åæ ‡
+     * @param endIndex   å³é¢çš„åæ ‡
      * @return
      */
     public static void quickSort(int[] array, int startIndex, int endIndex) {
-        //ÅĞ¶Ï·Ç¿Õ
+        //åˆ¤æ–­éç©º
         if (null == array || array.length < 1) {
             return;
         }
@@ -26,7 +26,7 @@ public class QuickSort {
     }
 
     /**
-     * ¿ìËÙÅÅĞò
+     * å¿«é€Ÿæ’åº
      *
      * @param array
      */

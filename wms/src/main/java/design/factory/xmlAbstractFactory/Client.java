@@ -1,6 +1,6 @@
 package design.factory.xmlAbstractFactory;
 
-import util.XmlUtil;
+import util.XmlUtilOne;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,7 +15,7 @@ public class Client {
         Button bt;
         TextField tf;
         ComboBox cb;
-        factory = (SkinFactory) XmlUtil.getBeanByFilePath("D:\\work\\javaTest\\wms\\src\\main\\java\\design\\factory\\xmlAbstractFactory\\config.xml");
+        factory = (SkinFactory) XmlUtilOne.getBeanByFilePath("D:\\work\\javaTest\\wms\\src\\main\\java\\design\\factory\\xmlAbstractFactory\\config.xml");
         bt = factory.createButton();
         tf = factory.createTextField();
         cb = factory.createComboBox();

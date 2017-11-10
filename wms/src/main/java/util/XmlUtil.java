@@ -1,54 +1,73 @@
 package util;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
-import java.io.IOException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 /**
- * 操作xml的工具类，方便用户配置
  * Created with IntelliJ IDEA.
- * User: qidima
- * Date: 2017/10/10
- * Time: 9:51
+ * <p>
+ * xml tools
+ *
+ * @author: qidima
+ * @date: 2017/11/9
+ * Time: 15:37
  */
 public class XmlUtil {
-    public static Object getBeanByFilePath(String filePath) {
-        //创建文档对象
-        DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
-        try {
-            DocumentBuilder builder = builderFactory.newDocumentBuilder();
-            //获取dom对象
-            Document document = builder.parse(new File(filePath));
-            //获取节点
-            NodeList nodeList = document.getElementsByTagName("className");
-            Node node = nodeList.item(0).getFirstChild();
-            String className = node.getNodeValue();
-            //通过类名生成实例对象并将其返回
-            Class c = Class.forName(className);
-            Object obj = c.newInstance();
-            return obj;
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-            return null;
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
+
+    /**
+     * Document元素
+     */
+    Document doc;
+
+    /**
+     * 根元素
+     */
+    Element root;
+
+    /**
+     * XML文件路径
+     */
+    String path;
+
+    /**
+     * 验证例外
+     */
+    Element validateErrors = null;
+
+    /**
+     * 构造器
+     *
+     * @param filePath 构造内容
+     * @param isFile  改内容是否来自于文件
+     */
+    XmlUtil(String filePath, boolean isFile) throws DocumentException {
+        if (isFile) {
+            SAXReader reader = new SAXReader();
+            FileInputStream inputStream;
+            try {
+                inputStream = new FileInputStream(filePath);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                throw new DocumentException("取得文件 : " + filePath + " InputStream例外 例外信息 : " + e.getMessage(), e);
+            }
+            this.doc = reader.read(inputStream);
+            path = filePath;
+        } else {
+            doc = DocumentHelper.parseText(filePath);
+            path = null;
         }
-        //最后的返回
-        return null;
+        root = doc.getRootElement();
     }
+
+    //读的方法
+
+    //写的方法
+
+
 }

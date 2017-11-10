@@ -1,8 +1,7 @@
 package design.prototype.appDemo;
 
-import util.XmlUtil;
+import util.XmlUtilOne;
 
-import java.io.File;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -22,8 +21,8 @@ class DocumentHandle {
 
     //读取配置 塞入hashtable中
     private DocumentHandle() {
-        List<DocumentTemplet> templetList = (List<DocumentTemplet>) XmlUtil.getBeanByFilePath("D:\\work\\javaTest\\wms\\src\\main\\java\\design\\prototype\\appDemo\\config.xml");
-//        List<DocumentTemplet> templetList = (List<DocumentTemplet>) XmlUtil.getBeanByFilePath("design/prototype/appDemo/config.xml");     linux
+        List<DocumentTemplet> templetList = (List<DocumentTemplet>) XmlUtilOne.getBeanByFilePath("D:\\work\\javaTest\\wms\\src\\main\\java\\design\\prototype\\appDemo\\config.xml");
+//        List<DocumentTemplet> templetList = (List<DocumentTemplet>) XmlUtilOne.getBeanByFilePath("design/prototype/appDemo/config.xml");     linux
         for (DocumentTemplet templet : templetList) {
             hashtable.put(templet.getClass().getName(), templet);
         }

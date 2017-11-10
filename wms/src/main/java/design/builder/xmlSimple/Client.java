@@ -1,6 +1,6 @@
 package design.builder.xmlSimple;
 
-import util.XmlUtil;
+import util.XmlUtilOne;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,7 +12,7 @@ public class Client {
     public  static void main(String args[])
     {
         ActorBuilder ab; //针对抽象建造者编程
-        ab =  (ActorBuilder) XmlUtil.getBeanByFilePath("D:\\work\\javaTest\\wms\\src\\main\\java\\design\\builder\\xmlSimple\\config.xml"); //反射生成具体建造者对象
+        ab =  (ActorBuilder) XmlUtilOne.getBeanByFilePath("D:\\work\\javaTest\\wms\\src\\main\\java\\design\\builder\\xmlSimple\\config.xml"); //反射生成具体建造者对象
 
         ActorController ac = new  ActorController();
         Actor actor;

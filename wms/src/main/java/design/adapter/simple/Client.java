@@ -1,6 +1,6 @@
 package design.adapter.simple;
 
-import util.XmlUtil;
+import util.XmlUtilOne;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,7 +11,7 @@ import util.XmlUtil;
 public class Client {
     public static void main(String[] args) {
         ScoreOperation operation;  //针对抽象目标接口编程
-        operation = (ScoreOperation) XmlUtil.getBeanByFilePath("D:\\work\\javaTest\\wms\\src\\main\\java\\design\\adapter\\simple\\config.xml"); //读取配置文件，反射生成对象
+        operation = (ScoreOperation) XmlUtilOne.getBeanByFilePath("D:\\work\\javaTest\\wms\\src\\main\\java\\design\\adapter\\simple\\config.xml"); //读取配置文件，反射生成对象
         int scores[] = {84, 76, 50, 69, 90, 91, 88, 96}; //定义成绩数组
         int result[];
         int score;

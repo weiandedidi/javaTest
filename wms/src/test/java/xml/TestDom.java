@@ -18,10 +18,11 @@ import java.util.List;
  */
 public class TestDom {
 
-    public Document getDomByPath(String path) throws DocumentException {
+    public static Document getDomByPath(String path) throws DocumentException {
         //创建SAXReader类的对象来实现读取XML文档
         SAXReader reader = new SAXReader();
-        Document doc = reader.read(new File(path));
+        File file = new File(path);
+        Document doc = reader.read(file);
         return doc;
     }
 
@@ -31,7 +32,7 @@ public class TestDom {
      * @param document
      * @return
      */
-    public Element readRoot(Document document) {
+    public static Element readRoot(Document document) {
         return document.getRootElement();
     }
 
@@ -41,34 +42,45 @@ public class TestDom {
      * @param root
      * @return
      */
-    public List<Element> getAllChildsByRoot(Element root) {
+    public static List<Element> getAllChildsByRoot(Element root) {
         List<Element> list = root.elements();
         return list;
     }
 
     /**
      * 获取当前元素下指定名字的元素
+     *
      * @param element
      * @param targetName
      * @return
      */
-    public List<Element> getElementsByName(Element element, String targetName) {
+    public static List<Element> getElementsByName(Element element, String targetName) {
         List<Element> targets = element.elements(targetName);
         return targets;
     }
 
     /**
      * 获取指定元素下的所有元素
+     *
      * @param element
      * @return
      */
-    public List<Element> elements(Element element){
+    public static List<Element> elements(Element element) {
         List<Element> elements = element.elements();
         return elements;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DocumentException {
         String path = "D:\\work\\javaTest\\wms\\src\\test\\java\\xml\\employee.xml";
+        Document document = getDomByPath(path);
+        Element root = readRoot(document);
+        List<Element> elements = getElementsByName(root,"emp");
+        //放入emp
+        for (Element e : elements) {
+
+            System.out.println(e.elementText("name"));
+        }
+
 
     }
 

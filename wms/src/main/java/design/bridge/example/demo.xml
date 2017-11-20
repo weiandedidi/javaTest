@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<books>
-    <book id="s" name="">
-
-    </book>
-</books>
+<?xml version="1.0"?>
+<config>
+    <!--RefinedAbstraction-->
+    <image>design.bridge.example.JPGImage</image>
+    <!--ConcreteImplementor-->
+    <os>design.bridge.example.WindowsImpl</os>
+</config>

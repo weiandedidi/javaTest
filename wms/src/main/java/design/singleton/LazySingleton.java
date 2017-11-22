@@ -8,7 +8,7 @@ package design.singleton;
  * Time: 19:18
  */
 public class LazySingleton {
-    private LazySingleton instance = null;
+    private static LazySingleton instance = null;
 
     private LazySingleton() {
     }

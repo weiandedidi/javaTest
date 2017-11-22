@@ -1,9 +1,9 @@
 package design.singleton;
 
 /**
- * Á½²ãËø
- * ĞèÒª×¢ÒâµÄÊÇ£¬Èç¹ûÊ¹ÓÃË«ÖØ¼ì²éËø¶¨À´ÊµÏÖÀÁººÊ½µ¥ÀıÀà£¬ĞèÒªÔÚ¾²Ì¬³ÉÔ±±äÁ¿instanceÖ®Ç°Ôö¼ÓĞŞÊÎ·ûvolatile£¬
- * ±»volatileĞŞÊÎµÄ³ÉÔ±±äÁ¿¿ÉÒÔÈ·±£¶à¸öÏß³Ì¶¼ÄÜ¹»ÕıÈ·´¦Àí£¬ÇÒ¸Ã´úÂëÖ»ÄÜÔÚJDK 1.5¼°ÒÔÉÏ°æ±¾ÖĞ²ÅÄÜÕıÈ·Ö´ĞĞ
+ * ä¸¤å±‚é”
+ * éœ€è¦æ³¨æ„çš„æ˜¯ï¼Œå¦‚æœä½¿ç”¨åŒé‡æ£€æŸ¥é”å®šæ¥å®ç°æ‡’æ±‰å¼å•ä¾‹ç±»ï¼Œéœ€è¦åœ¨é™æ€æˆå‘˜å˜é‡instanceä¹‹å‰å¢åŠ ä¿®é¥°ç¬¦volatileï¼Œ
+ * è¢«volatileä¿®é¥°çš„æˆå‘˜å˜é‡å¯ä»¥ç¡®ä¿å¤šä¸ªçº¿ç¨‹éƒ½èƒ½å¤Ÿæ­£ç¡®å¤„ç†ï¼Œä¸”è¯¥ä»£ç åªèƒ½åœ¨JDK 1.5åŠä»¥ä¸Šç‰ˆæœ¬ä¸­æ‰èƒ½æ­£ç¡®æ‰§è¡Œ
  * Created with IntelliJ IDEA.
  * User: qidima
  * Date: 2017/10/18
@@ -12,19 +12,19 @@ package design.singleton;
 public class LazySingletonDoubleLock {
     private volatile static LazySingletonDoubleLock instance = null;
 
-    //Ë½ÓĞµÄ·½·¨
+    //ç§æœ‰çš„æ–¹æ³•
     private LazySingletonDoubleLock() {
     }
 
-    //Ë«ÖØÄÚ²¿Ëø
+    //åŒé‡å†…éƒ¨é”
     public synchronized LazySingletonDoubleLock getInstance() {
-        //µÚÒ»ÖØÅĞ¶Ï
+        //ç¬¬ä¸€é‡åˆ¤æ–­
         if (instance == null) {
-            //Ëø¶¨´úÂë¿é
+            //é”å®šä»£ç å—
             synchronized (LazySingletonDoubleLock.class) {
-                //µÚ¶şÖØÅĞ¶Ï
+                //ç¬¬äºŒé‡åˆ¤æ–­
                 if (instance == null) {
-                    instance = new LazySingletonDoubleLock(); //´´½¨µ¥ÀıÊµÀı
+                    instance = new LazySingletonDoubleLock(); //åˆ›å»ºå•ä¾‹å®ä¾‹
                 }
             }
         }

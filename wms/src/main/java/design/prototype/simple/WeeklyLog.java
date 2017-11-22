@@ -31,7 +31,7 @@ import java.util.Date;
  */
 public class WeeklyLog implements Cloneable {
     private String name;
-    private String content;
+    private transient String content;   //transient 声明不序列化
     private Date date;
 
     public String getName() {

@@ -1,13 +1,13 @@
 package algorithm.sort.quick;
 
 /**
- * ¿ìËÙÅÅĞò
- * Ë¼Ïë£º·Ö¶øÖÎÖ®£¬ÓÃ»ù×¼ÏÈ·Ö¶Ñ£¬È»ºóÔÚ¶ÑÀïÃæÕÒ»ù×¼ÔÚÅÅĞò£¨µİ¹é£©£¬
- * ¹Ø¼üµã£º
- * 1.»ù×¼
- * 2.×óÓÒ½»»»
- * 3.µİ¹é
- * ´Ë·½·¨Ö»ÄÜÊÇÊ¹ÓÃ×î×ó²àµÄÔªËØ×÷Îª»ù×¼
+ * å¿«é€Ÿæ’åº
+ * æ€æƒ³ï¼šåˆ†è€Œæ²»ä¹‹ï¼Œç”¨åŸºå‡†å…ˆåˆ†å †ï¼Œç„¶ååœ¨å †é‡Œé¢æ‰¾åŸºå‡†åœ¨æ’åºï¼ˆé€’å½’ï¼‰ï¼Œ
+ * å…³é”®ç‚¹ï¼š
+ * 1.åŸºå‡†
+ * 2.å·¦å³äº¤æ¢
+ * 3.é€’å½’
+ * æ­¤æ–¹æ³•åªèƒ½æ˜¯ä½¿ç”¨æœ€å·¦ä¾§çš„å…ƒç´ ä½œä¸ºåŸºå‡†
  * Created with IntelliJ IDEA.
  * User: qidima
  * Date: 2017/11/1
@@ -20,26 +20,26 @@ public class QuickSort {
             return;
         }
 
-        int left = startIndex;  //×óÓÎ±ê
-        int right = endIndex;   //ÓÒÓÎ±ê
-        int standard = arr[left];   //»ù×¼
+        int left = startIndex;  //å·¦æ¸¸æ ‡
+        int right = endIndex;   //å³æ¸¸æ ‡
+        int standard = arr[left];   //åŸºå‡†
         while (left < right) {
-            while (left < right && arr[right] >= standard) {    //±Èstarder´óµÄÖ»ÊÇrightÓÎ±ê×óÒ»£¬arrÊıÖµ²»·¢Éú±ä»¯
+            while (left < right && arr[right] >= standard) {    //æ¯”starderå¤§çš„åªæ˜¯rightæ¸¸æ ‡å·¦ä¸€ï¼Œarræ•°å€¼ä¸å‘ç”Ÿå˜åŒ–
                 right--;
             }
-            arr[left] = arr[right];                             //±ÈÖĞÖáĞ¡µÄ¼ÇÂ¼ÒÆµ½µÍ¶Ë
-            while (left < right && arr[left] <= standard) {     //±ÈstarderĞ¡µÄÖ»ÊÇleftÓÎ±êÓÒÒÆ£¬arrÊıÖµ²»·¢Éú±ä»¯
+            arr[left] = arr[right];                             //æ¯”ä¸­è½´å°çš„è®°å½•ç§»åˆ°ä½ç«¯
+            while (left < right && arr[left] <= standard) {     //æ¯”starderå°çš„åªæ˜¯leftæ¸¸æ ‡å³ç§»ï¼Œarræ•°å€¼ä¸å‘ç”Ÿå˜åŒ–
                 left++;
             }
-            arr[right] = arr[left];                             //±ÈÖĞÖá´óµÄ¼ÇÂ¼ÒÆµ½¸ß¶Ë
+            arr[right] = arr[left];                             //æ¯”ä¸­è½´å¤§çš„è®°å½•ç§»åˆ°é«˜ç«¯
         }
-        arr[left] = standard;                                   //ÖĞÖá¼ÇÂ¼µ½
-        quickSort(arr, startIndex + 1, endIndex);   //×ó²àÅÅĞò
-        quickSort(arr, startIndex, endIndex - 1);   //ÓÒ²àÅÅĞò
+        arr[left] = standard;                                   //ä¸­è½´è®°å½•åˆ°
+        quickSort(arr, startIndex + 1, endIndex);   //å·¦ä¾§æ’åº
+        quickSort(arr, startIndex, endIndex - 1);   //å³ä¾§æ’åº
     }
 
     /**
-     * Èç¹ûÊÇ 49, 38¿ªÍ·Ö»ÄÜÊÇ0¿ªÊ¼  Èç¹ûÇ°ÃæµÄÒÑ¾­ÅÅÍêÁË£¬Ö»Ğè¸Ä±ästarIndexµÄ ÀıÈç 4, 5, 49¿ÉÒÔ´Ó2¿ªÊ¼
+     * å¦‚æœæ˜¯ 49, 38å¼€å¤´åªèƒ½æ˜¯0å¼€å§‹  å¦‚æœå‰é¢çš„å·²ç»æ’å®Œäº†ï¼Œåªéœ€æ”¹å˜starIndexçš„ ä¾‹å¦‚ 4, 5, 49å¯ä»¥ä»2å¼€å§‹
      *
      * @param args
      */

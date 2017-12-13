@@ -1,4 +1,4 @@
-package design.stats;
+package design.stats.demo;
 
 /**
  * 状态类

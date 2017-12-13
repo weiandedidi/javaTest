@@ -1,4 +1,4 @@
-package design.stats;
+package design.stats.demo;
 
 /**
  * Created by qidima on 2017/6/19.

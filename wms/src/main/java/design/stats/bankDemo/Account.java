@@ -24,6 +24,9 @@ public class Account {
     public Account(String owner, double balance) {
         this.owner = owner;
         this.balance = balance;
+        this.state = new NormalStatus(this); //设置初始状态
+        System.out.println(this.owner + "开户，初始金额为" + balance);
+        System.out.println("---------------------------------------------");
     }
 
     public double getBalance() {

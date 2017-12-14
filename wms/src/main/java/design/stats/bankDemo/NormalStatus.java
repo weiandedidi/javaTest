@@ -1,7 +1,7 @@
 package design.stats.bankDemo;
 
 /**
- * 如果账户中余额大于等于0，则账户的状态为正常状态(Normal State)，此时用户既可以向该账户存款也可以从该账户取款；
+ * 如果账户中余额大于等于0，则账户的状态为正常状态(NormalState State)，此时用户既可以向该账户存款也可以从该账户取款；
  *
  * @author: qidima
  * @date: 2017/12/14

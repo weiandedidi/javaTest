@@ -1,5 +1,7 @@
 package https;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 import util.https.HttpsUtils;
 
@@ -29,10 +31,15 @@ public class TestHttpsClient {
         headerMap.put("accept", "*/*");
         headerMap.put("connection", "Keep-Alive");
         headerMap.put("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36");
+        headerMap.put("content-type", "application/json; charset=utf-8");
+        headerMap.put("Accept","*/*");
         Map<String, String> params = new HashMap<String, String>();
-        url = "https://pp4.sohuno.com//2.0/api/queryusermobile/106605";
-        params.put("passport", "bjac8888@sohu.com");
-        String result = HttpsUtils.doHttpsPost(url,params,headerMap);
+        url = "https://note.wiz.cn/as/user/login?clientType=web&clientVersion=3.0.0&apiVersion=10&lang=zh-cn";
+        params.put("userId", "weiandedidi@163.com");
+        params.put("password", "maqidi4915338");
+
+        String data = JSON.toJSONString(params);
+        String result = HttpsUtils.doHttpsPost(url,data,headerMap);
         System.out.println(result);
 
 
@@ -43,8 +50,8 @@ public class TestHttpsClient {
         Map<String, String> headerMap = new HashMap<String, String>();
         headerMap.put("accept", "*/*");
         headerMap.put("connection", "Keep-Alive");
+        headerMap.put("Accept","*/*");
         headerMap.put("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36");
-
         String result = HttpsUtils.doHttpsGet(url,null,headerMap);
         System.out.println(result);
     }

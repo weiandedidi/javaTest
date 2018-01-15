@@ -5,18 +5,14 @@ import org.apache.http.message.BasicNameValuePair;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSocketFactory;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -66,7 +62,7 @@ public class HttpsUtils {
         }
 
         //先设置cookie，在连接connect
-        if("" != cookies){
+        if ("" != cookies) {
             httpsConn.setRequestProperty("Cookie", cookies);
         }
         httpsConn.setRequestMethod("GET");
@@ -112,7 +108,7 @@ public class HttpsUtils {
         //设置SSL设置套接工厂
         HttpsURLConnection httpsConn = (HttpsURLConnection) requestUrl.openConnection();
         //设置cookie，在传输数据前
-        if("" != cookies){
+        if ("" != cookies) {
             httpsConn.setRequestProperty("Cookie", cookies);
         }
 
@@ -177,4 +173,60 @@ public class HttpsUtils {
         String requestParam = URLEncodedUtils.format(list, "UTF-8");
         return requestParam;
     }
+
+    /**
+     * 获取验证码
+     *
+     * @param url
+     * @param headerMap
+     * @param cookies
+     */
+    public static void downloadImgsByUrl(String url, Map<String, String> headerMap, String cookies, String imageName) throws Exception {
+        // 请求结果
+        InputStream input = null;
+        URL uri;
+        //查询地址
+        if (null == url || "".equals(url)) {
+            return;
+        }
+        uri = new URL(url);
+        //设置SSL设置套接工厂
+        HttpsURLConnection httpsConn = (HttpsURLConnection) uri.openConnection();
+        SSLSocketFactory sslSocketFactory = BZX509TrustManager.getSSFactory();
+        httpsConn.setSSLSocketFactory(sslSocketFactory);
+        //设置消息头
+        for (Map.Entry<String, String> entry : headerMap.entrySet()) {
+            httpsConn.setRequestProperty(entry.getKey(), entry.getValue());
+        }
+
+        //先设置cookie，在连接connect
+        if (null != cookies && "" != cookies) {
+            httpsConn.setRequestProperty("Cookie", cookies);
+        }
+        httpsConn.setRequestMethod("GET");
+        //超时5s
+        httpsConn.setConnectTimeout(5 * 1000);
+        httpsConn.connect();
+        //获取cookie,供下次访问时使用
+        //取cookie
+        cookieVal = httpsConn.getHeaderField("set-cookie");
+        System.out.println("====================cookie:" + cookieVal + "================================");
+
+        input = httpsConn.getInputStream();
+        String path = "D:\\imgs\\" + imageName + System.currentTimeMillis()+".gif";
+        OutputStream out = new FileOutputStream(new File(path));
+        //得到图片的二进制数据，以二进制封装得到数据，具有通用性
+        byte[] buf = new byte[1024];
+        int length = 0;
+        System.out.println("开始下载:" + url);
+        while ((length = input.read(buf)) != -1) {
+            out.write(buf, 0, length);
+        }
+        out.flush();
+        input.close();
+        out.close();
+        System.out.println("下载完成======================= ");
+        return;
+    }
+
 }

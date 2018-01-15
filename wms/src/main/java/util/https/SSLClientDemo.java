@@ -13,7 +13,7 @@ import java.net.URL;
  * @date: 2018/1/12
  * Time: 11:50
  */
-public class SSLClient {
+public class SSLClientDemo {
         public static void main(String[] args) throws Exception {
             String httpsURL = "https://2sc.sohu.com";
             URL myUrl = new URL(httpsURL);

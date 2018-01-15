@@ -1,5 +1,7 @@
 package util.https;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -181,7 +183,7 @@ public class HttpsUtils {
      * @param headerMap
      * @param cookies
      */
-    public static void downloadImgsByUrl(String url, Map<String, String> headerMap, String cookies, String imageName) throws Exception {
+    public static void downloadImgsByUrl(String url, Map<String, String> headerMap, String cookies, String imageName, String imageType) throws Exception {
         // 请求结果
         InputStream input = null;
         URL uri;
@@ -213,8 +215,14 @@ public class HttpsUtils {
         System.out.println("====================cookie:" + cookieVal + "================================");
 
         input = httpsConn.getInputStream();
-        String path = "D:\\imgs\\" + imageName + System.currentTimeMillis()+".gif";
+//        String path = "D:\\imgs\\" + imageName + System.currentTimeMillis()+".gif";
+        String path = "/Users/qidima/Work/imgs/" + imageName + System.currentTimeMillis() + "." + imageType;
+//        String path = "/Users/qidima/Work/imgs/" + imageName + System.currentTimeMillis();
         OutputStream out = new FileOutputStream(new File(path));
+
+/*        byte[] buf = IOUtils.toByteArray(input);
+        FileUtils.writeByteArrayToFile(new File(path),buf);*/
+
         //得到图片的二进制数据，以二进制封装得到数据，具有通用性
         byte[] buf = new byte[1024];
         int length = 0;

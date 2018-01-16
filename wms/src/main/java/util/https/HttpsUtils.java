@@ -1,20 +1,20 @@
 package util.https;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -40,7 +40,7 @@ public class HttpsUtils {
      * @throws NoSuchProviderException
      * @throws KeyManagementException
      */
-    public static String doHttpsGet(String url, Map<String, String> params, Map<String, String> headerMap, String cookies) throws IOException, NoSuchAlgorithmException, NoSuchProviderException, KeyManagementException {
+    public static HttpsEntry doHttpsGet(String url, Map<String, String> params, Map<String, String> headerMap, String cookies) throws IOException, NoSuchAlgorithmException, NoSuchProviderException, KeyManagementException {
         // 请求结果
         BufferedReader in = null;
         String result = "";
@@ -70,11 +70,8 @@ public class HttpsUtils {
         httpsConn.setRequestMethod("GET");
         httpsConn.connect();
         //获取cookie,供下次访问时使用
-        //取cookie
         cookieVal = httpsConn.getHeaderField("set-cookie");
-        System.out.println("====================cookie:" + cookieVal + "================================");
-
-        in = new BufferedReader(new InputStreamReader(httpsConn.getInputStream(), "utf-8"));
+        in = new BufferedReader(new InputStreamReader(httpsConn.getInputStream(), "gbk"));
         String line;
         while ((line = in.readLine()) != null) {
             result += line;
@@ -82,7 +79,10 @@ public class HttpsUtils {
         if (in != null) {
             in.close();
         }
-        return result;
+        HttpsEntry entry = new HttpsEntry();
+        entry.setResult(result);
+        entry.setCookies(cookieVal);
+        return entry;
     }
 
     /**
@@ -98,7 +98,7 @@ public class HttpsUtils {
      * @throws KeyManagementException
      * @throws IOException
      */
-    public static Map<String, String> doHttpsPost(String url, String data, Map<String, String> headerMap, String cookies) throws NoSuchAlgorithmException, NoSuchProviderException, KeyManagementException, IOException {
+    public static HttpsEntry doHttpsPost(String url, String data, Map<String, String> headerMap, String cookies) throws NoSuchAlgorithmException, NoSuchProviderException, KeyManagementException, IOException {
         StringBuffer buffer = new StringBuffer();
         URL requestUrl;
         //查询地址
@@ -149,12 +149,10 @@ public class HttpsUtils {
         }
         //获取cookie
         cookieVal = httpsConn.getHeaderField("set-cookie");
-        System.out.println("====================cookie:" + cookieVal + "================================");
-//        return buffer.toString();
-        Map<String, String> result = new HashMap<String, String>();
-        result.put("out", buffer.toString());
-        result.put("cookies", cookieVal);
-        return result;
+        HttpsEntry entry = new HttpsEntry();
+        entry.setResult(buffer.toString());
+        entry.setCookies(cookieVal);
+        return entry;
     }
 
     /**
@@ -168,7 +166,7 @@ public class HttpsUtils {
         List<org.apache.http.NameValuePair> list = new ArrayList<org.apache.http.NameValuePair>();
         for (Map.Entry<String, String> entry : params.entrySet()) {
             String key = entry.getKey();
-            String value = entry.getKey();
+            String value = entry.getValue();
             list.add(new BasicNameValuePair(key, value));
         }
 
@@ -183,13 +181,13 @@ public class HttpsUtils {
      * @param headerMap
      * @param cookies
      */
-    public static void downloadImgsByUrl(String url, Map<String, String> headerMap, String cookies, String imageName, String imageType) throws Exception {
+    public static HttpsEntry downloadImgsByUrl(String url, Map<String, String> headerMap, String cookies, String imageName, String imageType) throws Exception {
         // 请求结果
         InputStream input = null;
         URL uri;
         //查询地址
         if (null == url || "".equals(url)) {
-            return;
+            return null;
         }
         uri = new URL(url);
         //设置SSL设置套接工厂
@@ -219,10 +217,6 @@ public class HttpsUtils {
         String path = "/Users/qidima/Work/imgs/" + imageName + System.currentTimeMillis() + "." + imageType;
 //        String path = "/Users/qidima/Work/imgs/" + imageName + System.currentTimeMillis();
         OutputStream out = new FileOutputStream(new File(path));
-
-/*        byte[] buf = IOUtils.toByteArray(input);
-        FileUtils.writeByteArrayToFile(new File(path),buf);*/
-
         //得到图片的二进制数据，以二进制封装得到数据，具有通用性
         byte[] buf = new byte[1024];
         int length = 0;
@@ -233,7 +227,29 @@ public class HttpsUtils {
         out.flush();
         input.close();
         out.close();
-        System.out.println("下载完成======================= ");
+        HttpsEntry entry = new HttpsEntry();
+        entry.setResult("");
+        entry.setCookies(cookieVal);
+        return entry;
+    }
+
+    public static void downloadCaptcha(String url, Map<String, String> headerMap, String cookies) throws Exception {
+        //connect
+        Connection connection = Jsoup.connect(url)
+                .ignoreContentType(true)
+                .ignoreContentType(true)
+                .method(Connection.Method.GET).timeout(30000);
+        //set header
+        for (Map.Entry<String, String> entry : headerMap.entrySet()) {
+            connection.header(entry.getKey(), entry.getValue());
+        }
+        //set cookie
+//        connection.cookie();
+        Connection.Response response = connection.execute();
+        FileOutputStream out = (new FileOutputStream(new File("D:\\imgs\\abc.gif")));
+        out.write(response.bodyAsBytes());
+        out.close();
+        System.out.println("Captcha Fetched");
         return;
     }
 

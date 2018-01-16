@@ -2,6 +2,7 @@ package https;
 
 import com.alibaba.fastjson.JSON;
 import org.junit.Test;
+import util.https.HttpsEntry;
 import util.https.HttpsUtils;
 
 import java.io.IOException;
@@ -45,8 +46,8 @@ public class TestHttpsClient {
         params.put("password", "maqidi4915338");
 
         String data = JSON.toJSONString(params);
-        Map<String, String> map = HttpsUtils.doHttpsPost(url, data, headerMap, null);
-        String result = map.get("out");
+        HttpsEntry entry = HttpsUtils.doHttpsPost(url, data, headerMap, null);
+        String result = entry.getResult();
         System.out.println(result);
     }
 
@@ -71,8 +72,8 @@ public class TestHttpsClient {
         params.put("userId", "weiandedidi@163.com");
         params.put("password", "maqidi4915338");
         String data = JSON.toJSONString(params);
-        Map<String, String> map = HttpsUtils.doHttpsPost(url, data, headerMapFirst, null);
-        String cockies = map.get("cookies");
+        HttpsEntry entry = HttpsUtils.doHttpsPost(url, data, headerMapFirst, null);
+        String cookies = entry.getCookies();
 
         Map<String, String> headerMapSecond = new HashMap<String, String>();
         headerMapFirst.put("accept", "*/*");
@@ -84,8 +85,8 @@ public class TestHttpsClient {
         headerMapFirst.put("Referer", "https://note.wiz.cn/login");
         Map<String, String> paramsV2 = new HashMap<String, String>();
         url = "https://note.wiz.cn/web";
-        String result = HttpsUtils.doHttpsGet(url, null, headerMapSecond, cockies);
-        System.out.println(result);
+        HttpsEntry entryV2 = HttpsUtils.doHttpsGet(url, null, headerMapSecond, cookies);
+        System.out.println(entryV2.getResult());
     }
 
 
@@ -114,8 +115,8 @@ public class TestHttpsClient {
         params.put("id", "weiandedidi");
         params.put("passwd", "maqidi4915338");
         String data = HttpsUtils.contactGetString(params);
-        Map<String, String> map = HttpsUtils.doHttpsPost(url, data, headerMap, null);
-        String result = map.get("out");
+        HttpsEntry entry = HttpsUtils.doHttpsPost(url, data, headerMap, null);
+        String result = entry.getResult();
         System.out.println(result);
 
     }
@@ -127,7 +128,7 @@ public class TestHttpsClient {
         headerMap.put("connection", "Keep-Alive");
         headerMap.put("Accept", "*/*");
         headerMap.put("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36");
-        String result = HttpsUtils.doHttpsGet(url, null, headerMap, null);
-        System.out.println(result);
+        HttpsEntry entry = HttpsUtils.doHttpsGet(url, null, headerMap, null);
+        System.out.println(entry.getResult());
     }
 }

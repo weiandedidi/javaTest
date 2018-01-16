@@ -3,6 +3,7 @@ package https.demo;
 import constant.ImageConstant;
 import org.junit.Test;
 import util.https.HttpsEntry;
+import util.https.HttpsTool;
 import util.https.HttpsUtils;
 
 import javax.annotation.Resource;
@@ -54,7 +55,7 @@ public class TestFirst {
 
 
     /**
-     * 登录第一车网
+     * 成功登录
      *
      * @throws Exception
      */
@@ -68,7 +69,8 @@ public class TestFirst {
         headerMap.put("Connection", "keep-alive");
         headerMap.put("Host", "www.iautos.cn");
         headerMap.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36");
-        HttpsUtils.downloadCaptcha(url, headerMap, null);
+        String cookies = HttpsUtils.downloadCaptcha(url, headerMap, null);
+        System.out.println("1111111111111111111111" + cookies);
         //输入验证码
         Scanner sc = new Scanner(System.in);
         System.out.println("请输入验证码：回车结束");
@@ -90,50 +92,86 @@ public class TestFirst {
         paramsMap.put("btnSubmit", "登录");
         paramsMap.put("backurl", "http://www.iautos.cn/beijing/");
         String data = HttpsUtils.contactGetString(paramsMap);
-        HttpsEntry entry = HttpsUtils.doHttpsPost(url, data, headerMap, null);
-        String cookies = entry.getCookies();
-        System.out.println("cookie==========================" + cookies);
-//        //查看我的车源
-//        url = "https://www.iautos.cn/home/usedcar/manage/";
-//        headerMap.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
-//        headerMap.put("Accept-Encoding", "gzip, deflate, br");
-//        headerMap.put("Accept-Language", "zh-CN,zh;q=0.9,en;q=0.8");
-//        headerMap.put("Connection", "keep-alive");
-//        headerMap.put("Host", "www.iautos.cn");
-//        headerMap.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36");
-//        HttpsEntry entryV2 = HttpsUtils.doHttpsGet(url, null, headerMap, cookies);
-//        System.out.println(entryV2.getResult());
-//        String path = "D:\\imgs\\abc.html";
-//        FileWriter fw=new FileWriter(path,true);
-//        BufferedWriter bufferedWriter = new BufferedWriter(fw);
-//        bufferedWriter.newLine();
-//        bufferedWriter.write(entryV2.getResult());
-//        bufferedWriter.close();
-//        fw.close();
-        //刷新车源
-        url = "https://www.iautos.cn/index.php";
-        headerMap.put("Accept", "application/json, text/javascript, */*; q=0.01");
+        // 需要导入cookie
+        HttpsEntry entry = HttpsUtils.doHttpsPost(url, data, headerMap, cookies);
+        String cookiesV2 = entry.getCookies();
+        System.out.println("cookiesV2==========================" + cookiesV2);
+        //查看我的车源
+        url = "https://www.iautos.cn/home/usedcar/manage/";
+        headerMap.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
         headerMap.put("Accept-Encoding", "gzip, deflate, br");
         headerMap.put("Accept-Language", "zh-CN,zh;q=0.9,en;q=0.8");
-        headerMap.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
         headerMap.put("Connection", "keep-alive");
         headerMap.put("Host", "www.iautos.cn");
-        headerMap.put("X-Requested-With", "XMLHttpRequest");
         headerMap.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36");
-        Map<String, String> paramsMapV3 = new HashMap<String, String>();
-
-        paramsMapV3.put("id", "4569068");
-        paramsMapV3.put("m", "home");
-        paramsMapV3.put("c", "usedcar");
-        paramsMapV3.put("a", "CarRefresh");
-        String xxx = HttpsUtils.contactGetString(paramsMapV3);
-        HttpsEntry entryV3 = HttpsUtils.doHttpsPost(url,xxx,headerMap,cookies);
-        System.out.println(entryV3.getResult());
-
+        HttpsEntry entryV2 = HttpsUtils.doHttpsGet(url, null, headerMap, cookiesV2);
+        System.out.println(entryV2.getResult());
+        String path = "D:\\imgs\\abc.html";
+        FileWriter fw = new FileWriter(path, true);
+        BufferedWriter bufferedWriter = new BufferedWriter(fw);
+        bufferedWriter.newLine();
+        bufferedWriter.write(entryV2.getResult());
+        bufferedWriter.close();
+        fw.close();
+        //刷新车源
     }
+
+    //1.获取验证 2.码登录 3.获取页面
+    public void testJsoup() throws Exception {
+        //1.验证码
+        String url = "https://www.iautos.cn/index.php?c=usedcar&a=get_captcha&key=login";
+        Map<String, String> headerMapFirst = new HashMap<String, String>();
+        headerMapFirst.put("Accept", "image/webp,image/apng,image/*,*/*;q=0.8");
+        headerMapFirst.put("Accept-Encoding", "gzip, deflate, br");
+        headerMapFirst.put("Connection", "keep-alive");
+        headerMapFirst.put("Host", "www.iautos.cn");
+        headerMapFirst.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36");
+        HttpsTool.downloadCaptcha(url, headerMapFirst, new HashMap<String, String>());
+        //输入验证码
+        Scanner sc = new Scanner(System.in);
+        System.out.println("请输入验证码：回车结束");
+        System.out.println();
+        String captcha = sc.nextLine();
+        //2.登录
+        url = "https://www.iautos.cn/user/login/";
+        Map<String, String> headerMapSecond = new HashMap<String, String>();
+        headerMapSecond.put("Accept", "image/webp,image/apng,image/*,*/*;q=0.8");
+        headerMapSecond.put("Accept-Encoding", "gzip, deflate, br");
+        headerMapSecond.put("Accept-Language", "zh-CN,zh;q=0.9,en;q=0.8");
+        headerMapSecond.put("Content-Type", "application/x-www-form-urlencoded");
+        headerMapSecond.put("Connection", "keep-alive");
+        headerMapSecond.put("Origin", "https://www.iautos.cn");
+        headerMapSecond.put("Referer", "https://www.iautos.cn/user/login/?backurl=http://www.iautos.cn/beijing/");
+        headerMapSecond.put("Host", "www.iautos.cn");
+        headerMapSecond.put("Content-Length", "191");
+        headerMapSecond.put("Upgrade-Insecure-Requests", "1");
+        headerMapSecond.put("Cache-Control", "max-age=0");
+        headerMapSecond.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36");
+        Map<String, String> paramsMapSecond = new HashMap<String, String>();
+        paramsMapSecond.put("username", "九台市诚信车行");
+        paramsMapSecond.put("password", "sun15944168129");
+        paramsMapSecond.put("validatecode", captcha);
+        paramsMapSecond.put("btnSubmit", "登录");
+        paramsMapSecond.put("backurl", "http://www.iautos.cn/beijing/");
+        Map<String, String> cookies = new HashMap<String, String>();
+        cookies = HttpsTool.postData(url, paramsMapSecond, headerMapSecond, cookies);
+        //3.登录
+        url = "https://www.iautos.cn/home/usedcar/manage/";
+        Map<String, String> headerMapThird = new HashMap<String, String>();
+        headerMapThird.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
+        headerMapThird.put("Accept-Encoding", "gzip, deflate, br");
+        headerMapThird.put("Accept-Language", "zh-CN,zh;q=0.9,en;q=0.8");
+        headerMapThird.put("Connection", "keep-alive");
+        headerMapThird.put("Host", "www.iautos.cn");
+        headerMapThird.put("Host", "www.iautos.cn");
+        headerMapThird.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36");
+        cookies = HttpsTool.getData(url, headerMapSecond, cookies);
+    }
+
 
     public static void main(String[] args) throws Exception {
         TestFirst first = new TestFirst();
+//        first.testJsoup();
         first.testCaptcha();
     }
 }

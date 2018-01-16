@@ -13,6 +13,7 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -69,9 +70,21 @@ public class HttpsUtils {
         }
         httpsConn.setRequestMethod("GET");
         httpsConn.connect();
-        //获取cookie,供下次访问时使用
-        cookieVal = httpsConn.getHeaderField("set-cookie");
-        in = new BufferedReader(new InputStreamReader(httpsConn.getInputStream(), "gbk"));
+        //获取cookie所有的set-cookie,供下次访问时使用
+        String key = null;
+        //回传的cookie==》resCookies
+        StringBuilder resCookies = new StringBuilder();
+        for (int i = 1; (key = httpsConn.getHeaderFieldKey(i)) != null; i++) {
+            if (key.equalsIgnoreCase("set-cookie")) {
+                String cookiePart = httpsConn.getHeaderField(i);
+                cookiePart = cookiePart.substring(0, cookiePart.indexOf(";"));      //Set-Cookie:userinfo=0; path=/; domain=.iautos.cn; httponly  截取第一个;之前的东西
+                resCookies.append(cookiePart);
+                resCookies.append(";");
+            }
+        }
+
+        System.out.println(resCookies.toString());
+        in = new BufferedReader(new InputStreamReader(httpsConn.getInputStream(), "GBK"));
         String line;
         while ((line = in.readLine()) != null) {
             result += line;
@@ -147,11 +160,25 @@ public class HttpsUtils {
         if (reader != null) {
             reader.close();
         }
-        //获取cookie
-        cookieVal = httpsConn.getHeaderField("set-cookie");
+        //获取cookie所有的set-cookie,供下次访问时使用
+        String key = null;
+        //回传的cookie==》resCookies
+        StringBuilder resCookies = new StringBuilder();
+        for (int i = 1; (key = httpsConn.getHeaderFieldKey(i)) != null; i++) {
+            System.out.println(key + ":" + httpsConn.getHeaderFieldKey(i));
+            if (key.equalsIgnoreCase("set-cookie")) {
+                String cookiePart = httpsConn.getHeaderField(i);
+                System.out.println(i + "================" + cookiePart);
+                cookiePart = cookiePart.substring(0, cookiePart.indexOf(";"));      //Set-Cookie:userinfo=0; path=/; domain=.iautos.cn; httponly  截取第一个;之前的东西
+                resCookies.append(cookiePart);
+                resCookies.append(";");
+            }
+        }
+
+        System.out.println(resCookies.toString());
         HttpsEntry entry = new HttpsEntry();
         entry.setResult(buffer.toString());
-        entry.setCookies(cookieVal);
+        entry.setCookies(resCookies.toString());
         return entry;
     }
 
@@ -233,7 +260,7 @@ public class HttpsUtils {
         return entry;
     }
 
-    public static void downloadCaptcha(String url, Map<String, String> headerMap, String cookies) throws Exception {
+    public static String downloadCaptcha(String url, Map<String, String> headerMap, String cookies) throws Exception {
         //connect
         Connection connection = Jsoup.connect(url)
                 .ignoreContentType(true)
@@ -250,7 +277,17 @@ public class HttpsUtils {
         out.write(response.bodyAsBytes());
         out.close();
         System.out.println("Captcha Fetched");
-        return;
+        HttpsEntry entry = new HttpsEntry();
+        Map<String, String> map = response.cookies();
+        StringBuilder cookieBack = new StringBuilder();
+        for (Map.Entry<String, String> entryset : map.entrySet()) {
+            cookieBack.append(entryset.getKey());
+            cookieBack.append("=");
+            cookieBack.append(entryset.getValue());
+            cookieBack.append(";");
+        }
+
+        return cookieBack.toString();
     }
 
 }

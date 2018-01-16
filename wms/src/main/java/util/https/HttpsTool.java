@@ -2,9 +2,9 @@ package util.https;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.util.Map;
 
 /**
@@ -46,8 +46,59 @@ public class HttpsTool {
         return;
     }
 
+    public static Map<String,String> postData(String url, Map<String, String> paramsMap, Map<String, String> headerMap, Map<String, String> cookies) throws IOException {
+        Connection conn = Jsoup.connect(url)
+                .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:35.0) Gecko/20100101 Firefox/35.0")
+                //not neccesary but these extra headers won't hurt
+                .timeout(0)
+                .method(Connection.Method.POST);
+        if (null != cookies && !cookies.isEmpty()) {
+            conn.cookies(cookies);
+        }
+        for (Map.Entry<String, String> entry : headerMap.entrySet()) {
+            conn.header(entry.getKey(), entry.getValue());
+        }
+        conn.data(paramsMap);
+        Connection.Response response = conn.execute();
+        Map<String, String> backCookies = response.cookies();
+        System.out.println(backCookies);
+        Document doc = response.parse();
+        FileWriter fr = new FileWriter("D:\\imgs\\post.html");
+        PrintWriter pw = new PrintWriter(fr);
+        pw.println(doc.toString());
+//        System.out.println(doc.toString());
+        pw.close();
+        fr.close();
+        return backCookies;
+    }
 
-//    public static getData(Map<String, String> paramsMap, Map<String, String> headerMap, Map<String, String> cookies) {
-//
-//    }
+
+
+    public static Map<String,String> getData(String url, Map<String, String> headerMap, Map<String, String> cookies) throws IOException {
+        Connection conn = Jsoup.connect(url)
+                .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:35.0) Gecko/20100101 Firefox/35.0")
+                //not neccesary but these extra headers won't hurt
+                .timeout(0)
+                .method(Connection.Method.GET);
+        if (null != cookies && !cookies.isEmpty()) {
+            conn.cookies(cookies);
+        }
+        for (Map.Entry<String, String> entry : headerMap.entrySet()) {
+            conn.header(entry.getKey(), entry.getValue());
+        }
+        Connection.Response response = conn.execute();
+        Map<String, String> backCookies = response.cookies();
+        System.out.println(response.cookies());
+        Document doc = response.parse();
+        FileWriter fr = new FileWriter("D:\\imgs\\get.html");
+        PrintWriter pw = new PrintWriter(fr);
+        pw.println(doc.toString());
+//        System.out.println(doc.toString());
+        pw.close();
+        fr.close();
+        return backCookies;
+    }
+
+
+
 }

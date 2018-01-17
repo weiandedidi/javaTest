@@ -26,8 +26,6 @@ import java.util.Map;
  */
 public class HttpsUtils {
 
-    public static String cookieVal = "";
-
     /**
      * https的get方法
      *
@@ -65,26 +63,16 @@ public class HttpsUtils {
         }
 
         //先设置cookie，在连接connect
-        if ("" != cookies) {
+        if (null != cookies && "" != cookies) {
             httpsConn.setRequestProperty("Cookie", cookies);
         }
         httpsConn.setRequestMethod("GET");
         httpsConn.connect();
-        //获取cookie所有的set-cookie,供下次访问时使用
-        String key = null;
-        //回传的cookie==》resCookies
-        StringBuilder resCookies = new StringBuilder();
-        for (int i = 1; (key = httpsConn.getHeaderFieldKey(i)) != null; i++) {
-            if (key.equalsIgnoreCase("set-cookie")) {
-                String cookiePart = httpsConn.getHeaderField(i);
-                cookiePart = cookiePart.substring(0, cookiePart.indexOf(";"));      //Set-Cookie:userinfo=0; path=/; domain=.iautos.cn; httponly  截取第一个;之前的东西
-                resCookies.append(cookiePart);
-                resCookies.append(";");
-            }
-        }
 
-        System.out.println(resCookies.toString());
-        in = new BufferedReader(new InputStreamReader(httpsConn.getInputStream(), "GBK"));
+        //获取返回的cookies
+        String backCookies = getCookies(httpsConn);
+        //处理html不能用bufferreader
+        in = new BufferedReader(new InputStreamReader(httpsConn.getInputStream()));
         String line;
         while ((line = in.readLine()) != null) {
             result += line;
@@ -94,12 +82,15 @@ public class HttpsUtils {
         }
         HttpsEntry entry = new HttpsEntry();
         entry.setResult(result);
-        entry.setCookies(cookieVal);
+        entry.setCookies(backCookies);
         return entry;
     }
 
     /**
      * 通过https发送post请求,返回cookie
+     * 只能用来post数据，返回json等格式，不能返回html
+     * 因为html返回的东西可能有压缩，所以返回的不是简单<>拼装的字符串</>
+     *  bodyStream = res.hasHeaderWithValue("Content-Encoding", "gzip") ? new BufferedInputStream(new GZIPInputStream(dataStream)) : new BufferedInputStream(dataStream);
      *
      * @param url
      * @param data      数据组装成string的data
@@ -123,7 +114,7 @@ public class HttpsUtils {
         //设置SSL设置套接工厂
         HttpsURLConnection httpsConn = (HttpsURLConnection) requestUrl.openConnection();
         //设置cookie，在传输数据前
-        if ("" != cookies) {
+        if (null != cookies && "" != cookies) {
             httpsConn.setRequestProperty("Cookie", cookies);
         }
 
@@ -160,27 +151,14 @@ public class HttpsUtils {
         if (reader != null) {
             reader.close();
         }
-        //获取cookie所有的set-cookie,供下次访问时使用
-        String key = null;
-        //回传的cookie==》resCookies
-        StringBuilder resCookies = new StringBuilder();
-        for (int i = 1; (key = httpsConn.getHeaderFieldKey(i)) != null; i++) {
-            System.out.println(key + ":" + httpsConn.getHeaderFieldKey(i));
-            if (key.equalsIgnoreCase("set-cookie")) {
-                String cookiePart = httpsConn.getHeaderField(i);
-                System.out.println(i + "================" + cookiePart);
-                cookiePart = cookiePart.substring(0, cookiePart.indexOf(";"));      //Set-Cookie:userinfo=0; path=/; domain=.iautos.cn; httponly  截取第一个;之前的东西
-                resCookies.append(cookiePart);
-                resCookies.append(";");
-            }
-        }
-
-        System.out.println(resCookies.toString());
+        //获取cookies
+        String backCookies = getCookies(httpsConn);
         HttpsEntry entry = new HttpsEntry();
         entry.setResult(buffer.toString());
-        entry.setCookies(resCookies.toString());
+        entry.setCookies(backCookies);
         return entry;
     }
+
 
     /**
      * 将hashMap转为lsit键值对
@@ -202,7 +180,8 @@ public class HttpsUtils {
     }
 
     /**
-     * 获取验证码
+     * 获取验证码，面向资源类的验证码
+     * String url = "https://i0.hdslb.com/bfs/active/1f8aa6cd328fee1eaf61d1f59e40e97addc1aae8.gif"
      *
      * @param url
      * @param headerMap
@@ -234,10 +213,7 @@ public class HttpsUtils {
         //超时5s
         httpsConn.setConnectTimeout(5 * 1000);
         httpsConn.connect();
-        //获取cookie,供下次访问时使用
-        //取cookie
-        cookieVal = httpsConn.getHeaderField("set-cookie");
-        System.out.println("====================cookie:" + cookieVal + "================================");
+
 
         input = httpsConn.getInputStream();
 //        String path = "D:\\imgs\\" + imageName + System.currentTimeMillis()+".gif";
@@ -256,11 +232,13 @@ public class HttpsUtils {
         out.close();
         HttpsEntry entry = new HttpsEntry();
         entry.setResult("");
-        entry.setCookies(cookieVal);
+        //获取cookies
+        String backCookies = getCookies(httpsConn);
+        entry.setCookies(backCookies);
         return entry;
     }
 
-    public static String downloadCaptcha(String url, Map<String, String> headerMap, String cookies) throws Exception {
+    public static String downloadCaptcha(String url, Map<String, String> headerMap, Map<String, String> cookies) throws Exception {
         //connect
         Connection connection = Jsoup.connect(url)
                 .ignoreContentType(true)
@@ -271,7 +249,9 @@ public class HttpsUtils {
             connection.header(entry.getKey(), entry.getValue());
         }
         //set cookie
-//        connection.cookie();
+        if (null != cookies && !cookies.isEmpty()) {
+            connection.cookies(cookies);
+        }
         Connection.Response response = connection.execute();
         FileOutputStream out = (new FileOutputStream(new File("D:\\imgs\\abc.gif")));
         out.write(response.bodyAsBytes());
@@ -286,8 +266,51 @@ public class HttpsUtils {
             cookieBack.append(entryset.getValue());
             cookieBack.append(";");
         }
-
         return cookieBack.toString();
     }
+
+    /**
+     * 获取返回的cookies
+     *
+     * @param httpsConn
+     * @return
+     */
+    private static String getCookies(HttpsURLConnection httpsConn) {
+        String key = null;
+        StringBuilder resCookies = new StringBuilder();
+        for (int i = 1; (key = httpsConn.getHeaderFieldKey(i)) != null; i++) {
+            if (key.equalsIgnoreCase("set-cookie")) {
+                String cookiePart = httpsConn.getHeaderField(i);
+                cookiePart = cookiePart.substring(0, cookiePart.indexOf(";"));      //Set-Cookie:userinfo=0; path=/; domain=.iautos.cn; httponly  截取第一个;之前的东西
+                resCookies.append(cookiePart);
+                resCookies.append(";");
+            }
+        }
+        return resCookies.toString();
+    }
+
+    /**
+     * 将cookies封装成map
+     * @param cookies
+     * @return
+     */
+    public static Map<String, String> packCookiesMap(String cookies) {
+        if (null == cookies || "".equals(cookies)) {
+            return null;
+        }
+        //截断；
+        String[] strs = cookies.split(";");
+        //根据=封装kv
+        if (strs.length < 1) {
+            return null;
+        }
+        Map<String, String> cookiesMap = new HashMap<String, String>();
+        for (int i = 0; i < strs.length; i++) {
+            String[] temp = strs[i].split("=");
+            cookiesMap.put(temp[0],temp[1]);
+        }
+        return cookiesMap;
+    }
+
 
 }

@@ -24,7 +24,7 @@ public class HttpsTool {
      * @param cookies
      * @throws Exception
      */
-    public static void downloadCaptcha(String url, Map<String, String> headerMap, Map<String, String> cookies) throws Exception {
+    public static HttpsEntry downloadCaptcha(String url, Map<String, String> headerMap, Map<String, String> cookies) throws Exception {
         //connect
         Connection connection = Jsoup.connect(url)
                 .ignoreContentType(true)
@@ -42,11 +42,14 @@ public class HttpsTool {
         FileOutputStream out = (new FileOutputStream(new File("D:\\imgs\\abc.gif")));
         out.write(response.bodyAsBytes());
         out.close();
-        System.out.println("Captcha Fetched");
-        return;
+        System.out.println("===========================================Captcha Fetched");
+        HttpsEntry entry = new HttpsEntry();
+        Map<String, String> cookiesMap = response.cookies();
+        entry.setCookiesMap(cookiesMap);
+        return entry;
     }
 
-    public static Map<String,String> postData(String url, Map<String, String> paramsMap, Map<String, String> headerMap, Map<String, String> cookies) throws IOException {
+    public static HttpsEntry postData(String url, Map<String, String> paramsMap, Map<String, String> headerMap, Map<String, String> cookies) throws IOException {
         Connection conn = Jsoup.connect(url)
                 .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:35.0) Gecko/20100101 Firefox/35.0")
                 //not neccesary but these extra headers won't hurt
@@ -61,7 +64,6 @@ public class HttpsTool {
         conn.data(paramsMap);
         Connection.Response response = conn.execute();
         Map<String, String> backCookies = response.cookies();
-        System.out.println(backCookies);
         Document doc = response.parse();
         FileWriter fr = new FileWriter("D:\\imgs\\post.html");
         PrintWriter pw = new PrintWriter(fr);
@@ -69,12 +71,15 @@ public class HttpsTool {
 //        System.out.println(doc.toString());
         pw.close();
         fr.close();
-        return backCookies;
+        HttpsEntry entry = new HttpsEntry();
+        Map<String, String> cookiesMap = response.cookies();
+        entry.setCookiesMap(cookiesMap);
+        return entry;
     }
 
 
 
-    public static Map<String,String> getData(String url, Map<String, String> headerMap, Map<String, String> cookies) throws IOException {
+    public static HttpsEntry getData(String url, Map<String, String> headerMap, Map<String, String> cookies) throws IOException {
         Connection conn = Jsoup.connect(url)
                 .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:35.0) Gecko/20100101 Firefox/35.0")
                 //not neccesary but these extra headers won't hurt
@@ -87,8 +92,6 @@ public class HttpsTool {
             conn.header(entry.getKey(), entry.getValue());
         }
         Connection.Response response = conn.execute();
-        Map<String, String> backCookies = response.cookies();
-        System.out.println(response.cookies());
         Document doc = response.parse();
         FileWriter fr = new FileWriter("D:\\imgs\\get.html");
         PrintWriter pw = new PrintWriter(fr);
@@ -96,7 +99,10 @@ public class HttpsTool {
 //        System.out.println(doc.toString());
         pw.close();
         fr.close();
-        return backCookies;
+        HttpsEntry entry = new HttpsEntry();
+        Map<String, String> cookiesMap = response.cookies();
+        entry.setCookiesMap(cookiesMap);
+        return entry;
     }
 
 

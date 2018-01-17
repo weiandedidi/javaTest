@@ -58,6 +58,7 @@ public class TestFirst {
      * 成功登录
      *
      * 都是null设置的cookie的锅，再用jsoup试试
+     * 问题，使用out流处理不了php的返回
      *
      * @throws Exception
      */
@@ -72,7 +73,7 @@ public class TestFirst {
         headerMap.put("Host", "www.iautos.cn");
         headerMap.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36");
         String cookies = HttpsUtils.downloadCaptcha(url, headerMap, null);
-        System.out.println("1111111111111111111111" + cookies);
+        System.out.println("cookiesV1==========================" + cookies);
         //输入验证码
         Scanner sc = new Scanner(System.in);
         System.out.println("请输入验证码：回车结束");
@@ -95,30 +96,46 @@ public class TestFirst {
         paramsMap.put("backurl", "http://www.iautos.cn/beijing/");
         String data = HttpsUtils.contactGetString(paramsMap);
         // 需要导入cookie
-        HttpsEntry entry = HttpsUtils.doHttpsPost(url, data, headerMap, cookies);
-        String cookiesV2 = entry.getCookies();
+        HttpsEntry entryV2 = HttpsUtils.doHttpsPost(url, data, headerMap, cookies);
+        String cookiesV2 = entryV2.getCookies();
         System.out.println("cookiesV2==========================" + cookiesV2);
-        //查看我的车源
+//        //查看我的车源
+//        url = "https://www.iautos.cn/home/usedcar/manage/";
+//        headerMap.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
+//        headerMap.put("Accept-Encoding", "gzip, deflate, br");
+//        headerMap.put("Accept-Language", "zh-CN,zh;q=0.9,en;q=0.8");
+//        headerMap.put("Connection", "keep-alive");
+//        headerMap.put("Host", "www.iautos.cn");
+//        headerMap.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36");
+//        HttpsEntry entryV3 = HttpsUtils.doHttpsGet(url, null, headerMap, cookiesV2);
+//        System.out.println("cookiesV3=========================="+entryV3.getCookies());
+//        System.out.println(entryV3.getResult());
+//        String path = "D:\\imgs\\abc.html";
+//        FileWriter fw = new FileWriter(path, true);
+//        BufferedWriter bufferedWriter = new BufferedWriter(fw);
+//        bufferedWriter.newLine();
+//        bufferedWriter.write(entryV2.getResult());
+//        bufferedWriter.close();
+//        fw.close();
+        Map<String, String> cookiesMap = HttpsUtils.packCookiesMap(cookiesV2);
+        //3.登录
+        System.out.println("cookiesMap"+cookiesMap);
         url = "https://www.iautos.cn/home/usedcar/manage/";
-        headerMap.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
-        headerMap.put("Accept-Encoding", "gzip, deflate, br");
-        headerMap.put("Accept-Language", "zh-CN,zh;q=0.9,en;q=0.8");
-        headerMap.put("Connection", "keep-alive");
-        headerMap.put("Host", "www.iautos.cn");
-        headerMap.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36");
-        HttpsEntry entryV2 = HttpsUtils.doHttpsGet(url, null, headerMap, cookiesV2);
-        System.out.println(entryV2.getResult());
-        String path = "D:\\imgs\\abc.html";
-        FileWriter fw = new FileWriter(path, true);
-        BufferedWriter bufferedWriter = new BufferedWriter(fw);
-        bufferedWriter.newLine();
-        bufferedWriter.write(entryV2.getResult());
-        bufferedWriter.close();
-        fw.close();
-        //刷新车源
+        Map<String, String> headerMapThird = new HashMap<String, String>();
+        headerMapThird.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
+        headerMapThird.put("Accept-Encoding", "gzip, deflate, br");
+        headerMapThird.put("Accept-Language", "zh-CN,zh;q=0.9,en;q=0.8");
+        headerMapThird.put("Connection", "keep-alive");
+        headerMapThird.put("Host", "www.iautos.cn");
+        headerMapThird.put("Host", "www.iautos.cn");
+        headerMapThird.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36");
+        HttpsEntry entryV3 = HttpsTool.getData(url, headerMapThird, cookiesMap);
+        System.out.println("cookiesV3==========================" + entryV3.getCookiesMap());
     }
 
     //1.获取验证 2.码登录 3.获取页面
+    //登陆后的cookies需要一直保存
+    //TODO cookie的累加拼接在流程里完成
     public void testJsoup() throws Exception {
         //1.验证码
         String url = "https://www.iautos.cn/index.php?c=usedcar&a=get_captcha&key=login";
@@ -128,7 +145,9 @@ public class TestFirst {
         headerMapFirst.put("Connection", "keep-alive");
         headerMapFirst.put("Host", "www.iautos.cn");
         headerMapFirst.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36");
-        HttpsTool.downloadCaptcha(url, headerMapFirst, new HashMap<String, String>());
+        HttpsEntry entryV1 = HttpsTool.downloadCaptcha(url, headerMapFirst, new HashMap<String, String>());
+        System.out.println("cookiesV1==========================" + entryV1.getCookiesMap());
+
         //输入验证码
         Scanner sc = new Scanner(System.in);
         System.out.println("请输入验证码：回车结束");
@@ -155,8 +174,9 @@ public class TestFirst {
         paramsMapSecond.put("validatecode", captcha);
         paramsMapSecond.put("btnSubmit", "登录");
         paramsMapSecond.put("backurl", "http://www.iautos.cn/beijing/");
-        Map<String, String> cookies = new HashMap<String, String>();
-        cookies = HttpsTool.postData(url, paramsMapSecond, headerMapSecond, cookies);
+        HttpsEntry entryV2 = HttpsTool.postData(url, paramsMapSecond, headerMapSecond, entryV1.getCookiesMap());
+        System.out.println("cookiesV2==========================" + entryV2.getCookiesMap());
+
         //3.登录
         url = "https://www.iautos.cn/home/usedcar/manage/";
         Map<String, String> headerMapThird = new HashMap<String, String>();
@@ -167,7 +187,8 @@ public class TestFirst {
         headerMapThird.put("Host", "www.iautos.cn");
         headerMapThird.put("Host", "www.iautos.cn");
         headerMapThird.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36");
-        cookies = HttpsTool.getData(url, headerMapSecond, cookies);
+        HttpsEntry entryV3 = HttpsTool.getData(url, headerMapThird, entryV2.getCookiesMap());
+        System.out.println("cookiesV3==========================" + entryV3.getCookiesMap());
     }
 
 

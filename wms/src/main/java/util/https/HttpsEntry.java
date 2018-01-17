@@ -1,5 +1,8 @@
 package util.https;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * https的结果实体类
  *
@@ -13,9 +16,13 @@ public class HttpsEntry {
      */
     private String result;
     /**
-     * 返回的cookies
+     * 存放连接在一起的cookies
      */
     private String cookies;
+    /**
+     * 存放k-v形式的cookie
+     */
+    private Map cookiesMap;
 
     public String getResult() {
         return result;
@@ -31,5 +38,13 @@ public class HttpsEntry {
 
     public void setCookies(String cookies) {
         this.cookies = cookies;
+    }
+
+    public Map getCookiesMap() {
+        return cookiesMap;
+    }
+
+    public void setCookiesMap(Map cookiesMap) {
+        this.cookiesMap = cookiesMap;
     }
 }

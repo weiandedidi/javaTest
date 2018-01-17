@@ -99,7 +99,7 @@ public class TestFirst {
         HttpsEntry entryV2 = HttpsUtils.doHttpsPost(url, data, headerMap, cookies);
         String cookiesV2 = entryV2.getCookies();
         System.out.println("cookiesV2==========================" + cookiesV2);
-//        //查看我的车源
+//        //查看我的车源  返回由于字节码原因乱码
 //        url = "https://www.iautos.cn/home/usedcar/manage/";
 //        headerMap.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
 //        headerMap.put("Accept-Encoding", "gzip, deflate, br");

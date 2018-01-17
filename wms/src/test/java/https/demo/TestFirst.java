@@ -8,6 +8,11 @@ import util.https.HttpsUtils;
 
 import javax.annotation.Resource;
 import java.io.*;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -82,7 +87,7 @@ public class TestFirst {
         //登录拿到cookie
         url = "https://www.iautos.cn/user/login/";
         headerMap.put("Accept", "image/webp,image/apng,image/*,*/*;q=0.8");
-        headerMap.put("Accept-Encoding", "gzip, deflate, br");
+//        headerMap.put("Accept-Encoding", "gzip, deflate, br");
         headerMap.put("Accept-Language", "zh-CN,zh;q=0.9,en;q=0.8");
         headerMap.put("Content-Type", "application/x-www-form-urlencoded");
         headerMap.put("Connection", "keep-alive");
@@ -185,10 +190,33 @@ public class TestFirst {
         headerMapThird.put("Accept-Language", "zh-CN,zh;q=0.9,en;q=0.8");
         headerMapThird.put("Connection", "keep-alive");
         headerMapThird.put("Host", "www.iautos.cn");
-        headerMapThird.put("Host", "www.iautos.cn");
         headerMapThird.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36");
         HttpsEntry entryV3 = HttpsTool.getData(url, headerMapThird, entryV2.getCookiesMap());
         System.out.println("cookiesV3==========================" + entryV3.getCookiesMap());
+    }
+
+    /**
+     * 爬二手车之家的https
+     */
+    @Test
+    public void testList() throws KeyManagementException, NoSuchAlgorithmException, NoSuchProviderException, IOException {
+        String url = "https://www.che168.com/Handler/ScriptCarList_V1.ashx?needData=1";
+        Map<String, String> headerMap = new HashMap<String, String>();
+        headerMap.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
+        //不压缩文件
+//        headerMap.put("Accept-Encoding", "gzip, deflate, br");
+        headerMap.put("Accept-Language", "zh-CN,zh;q=0.9,en;q=0.8");
+        headerMap.put("Connection", "keep-alive");
+        headerMap.put("Host", "www.che168.com");
+        headerMap.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36");
+        HttpsEntry entry = HttpsUtils.doHttpsGet(url,null,headerMap,null);
+        String result = entry.getResult();
+//        FileWriter fr = new FileWriter("D:\\imgs\\sss.txt");
+//        PrintWriter pw = new PrintWriter(fr);
+//        pw.println(result);
+////        System.out.println(doc.toString());
+//        pw.close();
+        System.out.println(result);
     }
 
 

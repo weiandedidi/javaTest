@@ -72,7 +72,7 @@ public class HttpsUtils {
         //获取返回的cookies
         String backCookies = getCookies(httpsConn);
         //处理html不能用bufferreader
-        in = new BufferedReader(new InputStreamReader(httpsConn.getInputStream()));
+        in = new BufferedReader(new InputStreamReader(httpsConn.getInputStream(),"GBK"));
         String line;
         while ((line = in.readLine()) != null) {
             result += line;

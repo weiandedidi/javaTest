@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created with IntelliJ IDEA.
@@ -68,11 +70,17 @@ public class HttpsUtils {
         }
         httpsConn.setRequestMethod("GET");
         httpsConn.connect();
-
+        //设置接受编码,没有默认UTF-8
+        String charset = "UTF-8";
+        Pattern pattern = Pattern.compile("charset=\\S*");
+        Matcher matcher = pattern.matcher(httpsConn.getContentType());
+        if (matcher.find()) {
+            charset = matcher.group().replace("charset=", "");
+        }
         //获取返回的cookies
         String backCookies = getCookies(httpsConn);
         //处理html不能用bufferreader
-        in = new BufferedReader(new InputStreamReader(httpsConn.getInputStream(),"GBK"));
+        in = new BufferedReader(new InputStreamReader(httpsConn.getInputStream(), charset));
         String line;
         while ((line = in.readLine()) != null) {
             result += line;
@@ -90,7 +98,7 @@ public class HttpsUtils {
      * 通过https发送post请求,返回cookie
      * 只能用来post数据，返回json等格式，不能返回html
      * 因为html返回的东西可能有压缩，所以返回的不是简单<>拼装的字符串</>
-     *  bodyStream = res.hasHeaderWithValue("Content-Encoding", "gzip") ? new BufferedInputStream(new GZIPInputStream(dataStream)) : new BufferedInputStream(dataStream);
+     * bodyStream = res.hasHeaderWithValue("Content-Encoding", "gzip") ? new BufferedInputStream(new GZIPInputStream(dataStream)) : new BufferedInputStream(dataStream);
      *
      * @param url
      * @param data      数据组装成string的data
@@ -137,13 +145,20 @@ public class HttpsUtils {
         // 注意编码格式，防止中文乱码
         out.write(outParams.getBytes("UTF-8"));
         out.flush();
-
-        //关闭输出
         if (out != null) {
             out.close();
         }
+
+        //设置接受编码,没有默认UTF-8
+        String charset = "UTF-8";
+        Pattern pattern = Pattern.compile("charset=\\S*");
+        Matcher matcher = pattern.matcher(httpsConn.getContentType());
+        if (matcher.find()) {
+            charset = matcher.group().replace("charset=", "");
+        }
+
         //获取输入流
-        BufferedReader reader = new BufferedReader(new InputStreamReader(httpsConn.getInputStream(), "utf-8"));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(httpsConn.getInputStream(), charset));
         String line;
         while ((line = reader.readLine()) != null) {
             buffer.append(line);
@@ -291,6 +306,7 @@ public class HttpsUtils {
 
     /**
      * 将cookies封装成map
+     *
      * @param cookies
      * @return
      */
@@ -307,7 +323,7 @@ public class HttpsUtils {
         Map<String, String> cookiesMap = new HashMap<String, String>();
         for (int i = 0; i < strs.length; i++) {
             String[] temp = strs[i].split("=");
-            cookiesMap.put(temp[0],temp[1]);
+            cookiesMap.put(temp[0], temp[1]);
         }
         return cookiesMap;
     }

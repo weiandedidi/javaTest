@@ -123,11 +123,12 @@ public class TestHttpsClient {
 
     @Test
     public void testHttpsGet() throws KeyManagementException, NoSuchAlgorithmException, NoSuchProviderException, IOException {
+        url = "https://app.che168.com/czy/web/v152/store/index.html?dealerId=128168";
         Map<String, String> headerMap = new HashMap<String, String>();
         headerMap.put("accept", "*/*");
         headerMap.put("connection", "Keep-Alive");
         headerMap.put("Accept", "*/*");
-        headerMap.put("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36");
+        headerMap.put("user-agent", "Mozilla/5.0 (Linux; U; Android 4.3; en-us; SM-N900T Build/JSS15J) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30");
         HttpsEntry entry = HttpsUtils.doHttpsGet(url, null, headerMap, null);
         System.out.println(entry.getResult());
     }

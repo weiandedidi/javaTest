@@ -1,5 +1,6 @@
 package com.qidi.thrift.service;
 
+import com.qidi.thrift.api.HelloService;
 import org.apache.thrift.TException;
 
 /**

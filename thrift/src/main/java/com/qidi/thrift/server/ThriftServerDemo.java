@@ -1,5 +1,6 @@
 package com.qidi.thrift.server;
 
+import com.qidi.thrift.api.HelloService;
 import com.qidi.thrift.service.HelloServiceImpl;
 import org.apache.thrift.TProcessor;
 import org.apache.thrift.protocol.TBinaryProtocol;

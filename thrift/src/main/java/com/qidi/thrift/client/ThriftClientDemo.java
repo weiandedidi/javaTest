@@ -1,5 +1,6 @@
 package com.qidi.thrift.client;
 
+import com.qidi.thrift.api.HelloService;
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;

@@ -25,16 +25,17 @@ public class UserServiceServer {
 
     public void start() {
         try {
+            //1, 传输层
             TServerSocket serverTransport = new TServerSocket(servicePort);
-            // 关联处理器与 服务的实现
-            TProcessor processor = new UserService.Processor<UserService.Iface>(iface);
-            // TBinaryProtocol 二进制编码格式进行数据传输
+            // 2. 协议层 TBinaryProtocol 二进制编码格式进行数据传输
             // 设置协议工厂为 TBinaryProtocol.Factory
             TBinaryProtocol.Factory proFactory = new TBinaryProtocol.Factory(true, true);
             TThreadPoolServer.Args args = new TThreadPoolServer.Args(serverTransport);
+            // 3. 处理层processor 关联处理器与 服务的实现
+            TProcessor processor = new UserService.Processor<UserService.Iface>(iface);
             args.processor(processor);
             args.protocolFactory(proFactory);
-            // 多线程服务器端使用标准的阻塞式 I/O
+            // 4. 服务层 多线程服务器端使用标准的阻塞式 I/O
             TServer server = new TThreadPoolServer(args);
             System.out.println("Starting server on port " + servicePort + "......");
             server.serve();

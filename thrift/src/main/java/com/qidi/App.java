@@ -10,4 +10,8 @@ public class App
     {
         System.out.println( "Hello World!" );
     }
+
+    public void abc() {
+        System.out.println("我是原方法....");
+    }
 }

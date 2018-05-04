@@ -28,6 +28,7 @@
     <modules>
         <module>wms</module>
         <module>thrift</module>
+        <module>springdemo</module>
     </modules>
     <groupId>com.qidi</groupId>
     <artifactId>javaStu</artifactId>

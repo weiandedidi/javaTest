@@ -14,6 +14,8 @@ public class Person {
 
     public Person() {
         System.out.println("这是一个无参构造函数");
+//        throw new OutOfMemoryError();
+
     }
 
     public Person(String name) {

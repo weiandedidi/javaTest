@@ -6,8 +6,13 @@
     <description>thrift配置文件</description>
     <bean id="person" class="com.qidi.bean.Person" init-method="init" destroy-method="destory" scope="singleton">
         <property name="name" value="小红"></property>
-        <property name="age" value="152"></property>
+        <!--<property name="age" value="152"></property>-->
     </bean>
+    <bean id="people" class="com.qidi.bean.People" >
+        <constructor-arg name="name" value="小龙"/>
+        <constructor-arg name="age" value="153"/>
+    </bean>
+
     <!--<context:component-scan base-package="com.qidi.bean">-->
     <!--</context:component-scan>-->
     <context:component-scan base-package="com.qidi.bean"></context:component-scan>

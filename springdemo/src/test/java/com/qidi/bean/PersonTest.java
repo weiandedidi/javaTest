@@ -36,4 +36,14 @@ public class PersonTest {
         animal.printName();
         context.close();
     }
+
+
+    @Test
+    public void testCreateBean() {
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/applicationContext.xml");
+        People people = context.getBean(People.class);
+
+        System.out.println(people.getName());
+        context.close();
+    }
 }

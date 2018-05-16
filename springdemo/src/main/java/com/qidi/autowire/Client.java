@@ -9,7 +9,7 @@ package com.qidi.autowire;
  */
 public class Client {
     String trafficViolationApiHost;
-    //这么写就是傻逼的行为
+    //TODO 这么写就是傻逼的行为
     public final String AUTO_WZCX_LIST_API = trafficViolationApiHost + Constant.AUTO_TRAFFIC_VILATION_API_URL;
 
     public String getTrafficViolationApiHost() {

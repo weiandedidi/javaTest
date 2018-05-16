@@ -13,6 +13,9 @@
         <constructor-arg name="age" value="153"/>
     </bean>
 
+    <bean id="client" class="com.qidi.autowire.Client" >
+        <property name="trafficViolationApiHost" value="http://weizhang.auto.sohu.com"></property>
+    </bean>
     <!--<context:component-scan base-package="com.qidi.bean">-->
     <!--</context:component-scan>-->
     <context:component-scan base-package="com.qidi.bean"></context:component-scan>

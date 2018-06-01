@@ -1,4 +1,4 @@
-package thread;
+package thread.demo;
 
 /**
  * Created with IntelliJ IDEA.

@@ -1,7 +1,5 @@
 package thread.pool;
 
-import java.util.concurrent.*;
-
 /**
  * ①newSingleThreadExecutor
  * 单个线程的线程池，即线程池中每次只有一个线程工作，单线程串行执行任务
@@ -15,6 +13,7 @@ import java.util.concurrent.*;
  * ④newScheduleThreadExecutor
  * 大小无限制的线程池，支持定时和周期性的执行线程
  */
-public class MyThreadExecutor {
+public class MyThreadExecutor{
+
 
 }

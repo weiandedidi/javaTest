@@ -21,7 +21,7 @@ public class AccountThread extends Thread {
     /**
      * 每次取100固定，方法锁
      */
-/*    public synchronized static void getMoney() {
+    public synchronized static void getMoney(Account account) {
         if (account.balance >= 100) {
             try {
                 sleep(delay);
@@ -32,7 +32,6 @@ public class AccountThread extends Thread {
         } else
             System.out.println("withdraw failed!");
     }
-    */
 
     /**
      * 对象锁  Account account不是static的,注意这种类锁
@@ -74,7 +73,7 @@ public class AccountThread extends Thread {
      * withdraw  100 successful!
      * withdraw  100 successful!
      */
-    public static void getMoney(Account account) {
+    /*public static void getMoney(Account account) {
 
         synchronized (account) {
             if (account.balance >= 100) {
@@ -89,7 +88,7 @@ public class AccountThread extends Thread {
             }
         }
 
-    }
+    }*/
 
 
     @Override

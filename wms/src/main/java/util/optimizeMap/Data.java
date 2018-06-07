@@ -8,4 +8,16 @@ package util.optimizeMap;
  * Time: 15:17
  */
 public class Data {
+    private volatile int i;
+
+    public void testPlus(int i) {
+        i = 9;
+        i++;
+        System.out.println(i);
+    }
+
+    public static void main(String[] args) {
+        Data data = new Data();
+        data.testPlus(data.i);
+    }
 }

@@ -6,9 +6,12 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
+ * ReentrantLock是基于Thread.currentThread()实现的
  * ReentrantReadWriteLock可以用来提高某些集合的并发性能。
  * 当集合比较大，并且读比写频繁时，可以使用该类
  * TreeMap使用ReentrantReadWriteLock进行封装成并发性能提高的一个例子
+ * 看看{@link ReentrantReadWriteLock}源码中的事例
+ *
  *
  * @author: qidima
  * @date: 2018/6/4

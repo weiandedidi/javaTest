@@ -2,13 +2,11 @@ package kafka.springKafka;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.sohu.auto.db.api.admin.consts.DbVideoConstant;
-import com.sohu.auto.db.core.data.mybatis.entity.DbVideo;
-import com.sohu.auto.db.core.service.basic.DbVideoService;
 import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;
 import kafka.message.MessageAndMetadata;
 import kafka.springKafka.entry.DbVideo;
+import kafka.springKafka.service.DbVideoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,6 +37,8 @@ public class DbVideoConsumerWorker implements Runnable {
     public void run() {
         dbVideoService = (DbVideoService) DbVideoListener.applicationContext.getBean("dbVideoService");
         ConsumerIterator<String, String> it = stream.iterator();
+
+        //一直持续
         while (it.hasNext()) {
             MessageAndMetadata<String, String> messageAndMetadata = it.next();
             logger.debug(Thread.currentThread().getName() + ": partition[" + messageAndMetadata.partition() + "],"
@@ -64,19 +64,20 @@ public class DbVideoConsumerWorker implements Runnable {
                 //下架
                 JSONArray jsonArray = object.getJSONArray("content");
                 List<DbVideo> deleteVideos = new ArrayList<DbVideo>();
-                for (int i = 0; i < deleteVideos.size(); i++) {
+                for (int i = 0; i < jsonArray.size(); i++) {
                     JSONObject deleteData = jsonArray.getJSONObject(i);
                     Long videoId = deleteData.getLong("doc_id");
                     DbVideo dbVideo = new DbVideo();
                     dbVideo.setVideoId(videoId);
                     dbVideo.setStatus(DbVideoConstant.STATUS_DELETE);
+                    dbVideo.setSourceId(DbVideoConstant.SOURCE_SOFA);
+                    dbVideo.setCheckStatus(DbVideoConstant.CHECK_NO_PASS);
                     deleteVideos.add(dbVideo);
                 }
                 dbVideoService.batchDeleteDbvideosByVideoIds(deleteVideos);
                 deleteVideos = null;
             }
         }
-
     }
 
     /**
@@ -172,14 +173,30 @@ public class DbVideoConsumerWorker implements Runnable {
         return dbVideoList;
     }
 
-//    public static void main(String[] args) {
-//        String message = "{\"source_name\":\"sohu_sofa\",\"source_id\":\"f979bf87f8ce9061e690a8e73cccfb97\",\"operation\":\"ADD\",\"timestamp\":\"1528641175248\",\"content\":[{\"vid\":190592711703646208,\"cid\":22,\"videoTitle\":\"报废的自行车千万别丢，看牛人如何将它改成电动车，真不愧是逆天神器\",\"subtitle\":\"报废的自行车千万别丢，看牛人如何将它改成电动车，真不愧是逆天神器\",\"description\":\"报废的自行车千万别丢，看牛人如何将它改成电动车，真不愧是逆天神器\",\"videoDuration\":330800,\"videoUploadTime\":1528599980825,\"thumbnailUrl\":\"http://img01.youju.sohu.com/e992bdf0-e3ac-4505-a1bb-e3a8c674739a.jpg\",\"verticalThumbnailUrl\":\"\",\"authorName\":\"机械创造者\",\"userId\":7443,\"avatarUrl\":\"http://img01.youju.sohu.com/20180104230405_5538e54c.jpg\",\"videoTag\":\"千万别,如何,牛人,逆天,自行车\",\"videoStatus\":1,\"code\":0,\"playInfo\":[{\"playId\":190593290613243904,\"videoLevelId\":2,\"videoWidth\":852,\"videoHeight\":480,\"videoSize\":26612828,\"videoUrl\":\"http://video01.youju.sohu.com/c511ac5e-583a-4e20-a9f8-4a64bec7883e2_1_0.mp4\",\"videoStatus\":3,\"isX265\":false,\"rate\":\"606508\"}],\"site\":\"sohutv\",\"oriPlayCount\":0,\"oriCommentCount\":0,\"category\":\"1023\"}]}";
-//        JSONObject object = JSONObject.parseObject(message);
-//        String operation = (String) object.get("operation");
-//        JSONArray jsonArray = object.getJSONArray("content");
-//        List<DbVideo> toInsetVideos = transJsonArray2Videos(jsonArray);
-//        System.out.println(toInsetVideos.get(0).getName());
-//    }
+    public static void main(String[] args) {
+/*        String message = "{\"source_name\":\"sohu_sofa\",\"source_id\":\"f979bf87f8ce9061e690a8e73cccfb97\",\"operation\":\"ADD\",\"timestamp\":\"1528641175248\",\"content\":[{\"vid\":190592711703646208,\"cid\":22,\"videoTitle\":\"报废的自行车千万别丢，看牛人如何将它改成电动车，真不愧是逆天神器\",\"subtitle\":\"报废的自行车千万别丢，看牛人如何将它改成电动车，真不愧是逆天神器\",\"description\":\"报废的自行车千万别丢，看牛人如何将它改成电动车，真不愧是逆天神器\",\"videoDuration\":330800,\"videoUploadTime\":1528599980825,\"thumbnailUrl\":\"http://img01.youju.sohu.com/e992bdf0-e3ac-4505-a1bb-e3a8c674739a.jpg\",\"verticalThumbnailUrl\":\"\",\"authorName\":\"机械创造者\",\"userId\":7443,\"avatarUrl\":\"http://img01.youju.sohu.com/20180104230405_5538e54c.jpg\",\"videoTag\":\"千万别,如何,牛人,逆天,自行车\",\"videoStatus\":1,\"code\":0,\"playInfo\":[{\"playId\":190593290613243904,\"videoLevelId\":2,\"videoWidth\":852,\"videoHeight\":480,\"videoSize\":26612828,\"videoUrl\":\"http://video01.youju.sohu.com/c511ac5e-583a-4e20-a9f8-4a64bec7883e2_1_0.mp4\",\"videoStatus\":3,\"isX265\":false,\"rate\":\"606508\"}],\"site\":\"sohutv\",\"oriPlayCount\":0,\"oriCommentCount\":0,\"category\":\"1023\"}]}";
+        JSONObject object = JSONObject.parseObject(message);
+        String operation = (String) object.get("operation");
+        JSONArray jsonArray = object.getJSONArray("content");
+        List<DbVideo> toInsetVideos = transJsonArray2Videos(jsonArray);
+        System.out.println(toInsetVideos.get(0).getName());*/
+
+
+/*        String message = "{\"source_name\":\"sohu_sofa\",\"source_id\":\"f979bf87f8ce9061e690a8e73cccfb97\",\"operation\":\"DELETE\",\"timestamp\":\"1524017221283\",\"content\":[{\"doc_url\":\"\",\"doc_id\":\"171197461612482560\",\"reason\":\"\"}]}";
+        JSONObject object = JSONObject.parseObject(message);
+        JSONArray jsonArray = object.getJSONArray("content");
+        List<DbVideo> deleteVideos = new ArrayList<DbVideo>();
+        for (int i = 0; i < jsonArray.size(); i++) {
+            JSONObject deleteData = jsonArray.getJSONObject(i);
+            Long videoId = deleteData.getLong("doc_id");
+            DbVideo dbVideo = new DbVideo();
+            dbVideo.setVideoId(videoId);
+            dbVideo.setStatus(DbVideoConstant.STATUS_DELETE);
+            deleteVideos.add(dbVideo);
+        }
+        System.out.println(deleteVideos.get(0).getVideoId());
+        System.out.println(deleteVideos.get(0).getStatus());*/
+    }
 
 
 }

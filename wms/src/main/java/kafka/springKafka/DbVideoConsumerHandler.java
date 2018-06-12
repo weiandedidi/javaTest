@@ -18,7 +18,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created with IntelliJ IDEA.
+ * 使用DbVideoConsumerHandler作为操作类，在线程池中放入，启动worker线程
+ * KafkaStream 是阻塞形式的数据集，想象成可以无限拓展，一直向里面放数据的结果集
+ * 数据流处理器KafkaStream
+ * ConsumerIterator<String, String> it = stream.iterator()  it.next()是阻塞模式的
  *
  * @author: qidima
  * @date: 2018/6/11

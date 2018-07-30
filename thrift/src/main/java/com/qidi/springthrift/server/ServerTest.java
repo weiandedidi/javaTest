@@ -13,7 +13,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class ServerTest {
 
     public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/applicationContext_server.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("classpath:/spring/applicationContext_server.xml");
         UserServiceServer userServiceServer = (UserServiceServer) context.getBean(UserServiceServer.class);
         userServiceServer.start();
 

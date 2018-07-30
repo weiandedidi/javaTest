@@ -7,6 +7,6 @@ package design.factory.abstactFactory;
  * Time: 15:48
  */
 public interface Logger {
-    //³éÏó
+    //å†™æ—¥å¿—
     public void writeLog();
 }

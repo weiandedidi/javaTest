@@ -8,7 +8,7 @@ package design.factory.abstactFactory;
  */
 public interface LoggerFactory{
     /**
-     * 创建日志
+     * 鏃ュ織宸ュ巶
      * @return
      */
     public Logger createLogger();

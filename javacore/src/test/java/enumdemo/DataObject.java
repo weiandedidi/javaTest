@@ -11,7 +11,7 @@ import java.util.HashMap;
  */
 public enum DataObject {
     /**
-     * µ¥ÀýµÄÊµÀý
+     * å®žåŠ›
      */
     INSTANCE;
 

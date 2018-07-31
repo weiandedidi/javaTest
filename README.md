@@ -1,7 +1,7 @@
 study
 =========================
 
-# 1. sping 
+# 1. spring 
 
 # 2. thrift
 

@@ -36,6 +36,7 @@ public class Server {
         }
     }
 
+    //TODO 使用高可用的线程池
     private class HandlerThread implements Runnable {
         private Socket socket;
 

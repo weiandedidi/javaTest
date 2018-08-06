@@ -22,10 +22,10 @@ public class Client {
             System.out.println("服务器负载均衡器具有唯一性！");
         }
         //增加服务器
-        balancer1.addServer("Server 1");
-        balancer1.addServer("Server 2");
-        balancer1.addServer("Server 3");
-        balancer1.addServer("Server 4");
+        balancer1.addServer("SocketServer 1");
+        balancer1.addServer("SocketServer 2");
+        balancer1.addServer("SocketServer 3");
+        balancer1.addServer("SocketServer 4");
 
         //模拟客户端请求的分发
         for (int i = 0; i < 10; i++) {

@@ -1,5 +1,8 @@
 package socket;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -20,6 +23,7 @@ public class ABDServer {
     //维护一个线程池
     private ExecutorService executorPool;
     private Integer FIX_THREAD_SIZE = 5;
+//    private Logger logger = LoggerFactory.getLogger(ABDServer.class);
 
 
     public static void main(String[] args) throws IOException {
@@ -67,6 +71,16 @@ public class ABDServer {
 
                 while ((line = reader.readLine()) != null) {
                     builder = builder.append(line);
+                }
+                //需要对abd dba 进行判断和拆分
+                String result = builder.toString();
+                //热力数据
+                if (result.startsWith("ABD") && result.endsWith("DBA")) {
+                    System.out.println("========= 热力数据 =============");
+                    String[] groups = result.split("ABD|DBA");
+                    for (int i = 0; i < groups.length; i++) {
+                        System.out.println(groups[i]);
+                    }
                 }
                 System.out.println("from client..." + socket.getInetAddress() + " 当前线程：" + Thread.currentThread().getName());
                 System.out.println(builder.toString());

@@ -13,7 +13,7 @@ import java.net.Socket;
 public class SocketServer {
     public static void main(String[] args) throws IOException {
         //监听端口
-        int port = 11001;
+        int port = 11002;
         // server将一直等待连接的到来
         ServerSocket server = new ServerSocket(port);
         System.out.println("服务端开启服务...");

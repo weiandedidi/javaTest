@@ -14,7 +14,7 @@ public class Client {
         //构建IO
         try {
 
-            Socket s = new Socket("127.0.0.1", 8888);
+            Socket s = new Socket("127.0.0.1", 11002);
             InputStream is = s.getInputStream();
             OutputStream os = s.getOutputStream();
 

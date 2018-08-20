@@ -12,3 +12,4 @@ atlassian-ide-plugin.xml
 #target
 target/
 logs
+.DS_Store

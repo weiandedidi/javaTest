@@ -2,11 +2,13 @@ package com.qidi.mvc;
 
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
+ * 跨域
  * 返回jsonp  和spring 4.1之前和之后
  *
  * @author: qidima
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class JSONP {
 
     /**
-     * spring 4.1 在之后 使用MappingJacksonValue
+     * spring 4.1 在之后 使用MappingJacksonValue jsonp实现跨域
      * 此方法兼容json
      *
      * @return
@@ -36,5 +38,21 @@ public class JSONP {
         return result;
     }
 
+
+    /**
+     * 使用@CrossOrigin注解实现跨域，可标注在类和方法上
+     *
+     * @param id
+     * @param callback
+     * @return
+     */
+    @RequestMapping("/resultV2")
+    @ResponseBody
+    @CrossOrigin
+    public Object commentByIdV2(@RequestParam(value = "id") Integer id) {
+        String result = "data";
+        //返回json
+        return result;
+    }
 
 }

@@ -1,8 +1,5 @@
 package json;
 
-import com.alibaba.fastjson.annotation.JSONField;
-
-import javax.xml.crypto.Data;
 import java.io.Serializable;
 
 /**
@@ -13,22 +10,32 @@ import java.io.Serializable;
  * Time: 17:47
  */
 public class Ao implements Serializable {
-    private Integer id;
-    private Data data;
+    private String name;
+    private String age;
 
-    public Integer getId() {
-        return id;
+    private Bo bo;
+
+    public String getName() {
+        return name;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Data getData() {
-        return data;
+    public String getAge() {
+        return age;
     }
 
-    public void setData(Data data) {
-        this.data = data;
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public Bo getBo() {
+        return bo;
+    }
+
+    public void setBo(Bo bo) {
+        this.bo = bo;
     }
 }

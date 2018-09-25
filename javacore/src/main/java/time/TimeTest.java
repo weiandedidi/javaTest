@@ -3,6 +3,7 @@ package time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -32,11 +33,25 @@ public class TimeTest {
         return date.getTime();
     }
 
+    /**
+     * 获取前一个小时的整点数字
+     *
+     * @param date 指定时间
+     * @return 前一小时整点数字
+     */
+    public static Integer getPreviousClock(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        Integer clock = calendar.get(Calendar.HOUR_OF_DAY) - 1;
+        return clock;
+    }
+
 
     public static void main(String[] args) throws ParseException {
         Date date = new Date();
         System.out.println(getISO8601TimeFormat(date));
         System.out.println(getISO8601Timestamp("2018-09-19T19:41:10+08:00"));
         System.out.println(getTime("20180827")/1000);
+
+        System.out.println(getPreviousClock(new Date()));
     }
 }

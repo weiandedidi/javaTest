@@ -1,11 +1,13 @@
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by qidima on 2017/7/3.
  */
-public class TestTime {
+public class TestDecimal {
     public static void main(String[] args) {
         System.out.println(System.currentTimeMillis());
         Integer a = 5;
@@ -24,8 +26,16 @@ public class TestTime {
         integers.add(1);
         integers.add(1);
         integers.add(1);
-        integers.subList(0,3);
-        integers.subList(4,5);
+        integers.subList(0, 3);
+        integers.subList(4, 5);
         System.out.println(integers.size());
+        System.out.println((double) 4 / 51);
+        DecimalFormat dec = new DecimalFormat("0.0000");
+
+        Double xx = (double) 4 / 51;
+        System.out.println(dec.format(3.555));
+        String xxxStr = dec.format(3.555);
+
+        System.out.println(new BigDecimal(xxxStr).setScale(2, RoundingMode.HALF_DOWN));
     }
 }

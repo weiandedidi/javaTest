@@ -37,5 +37,8 @@ public class TestDecimal {
         String xxxStr = dec.format(3.555);
 
         System.out.println(new BigDecimal(xxxStr).setScale(2, RoundingMode.HALF_DOWN));
+        System.out.println(2/9);
+        System.out.println((double) 2/9*100);
+        System.out.println(new BigDecimal((double) 2 / 9 * 100).setScale(2, RoundingMode.HALF_UP));
     }
 }

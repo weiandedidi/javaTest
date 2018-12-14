@@ -40,5 +40,14 @@ public class TestDecimal {
         System.out.println(2/9);
         System.out.println((double) 2/9*100);
         System.out.println(new BigDecimal((double) 2 / 9 * 100).setScale(2, RoundingMode.HALF_UP));
+        System.out.println("=======");
+        System.out.println(new Long(5L).toString());
+
+
+        BigDecimal xxx = new BigDecimal("6.123");
+        System.out.println(xxx.subtract(new BigDecimal("5.111")));
+        System.out.println(xxx);
+        Long aaa = new Long(5);
+        System.out.println(aaa);
     }
 }

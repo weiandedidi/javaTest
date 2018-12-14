@@ -36,6 +36,13 @@
     </properties>
 
     <dependencies>
+        <!--lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.18</version>
+            <scope>provided</scope>
+        </dependency>
         <!-- logging begin -->
         <dependency>
             <groupId>org.slf4j</groupId>

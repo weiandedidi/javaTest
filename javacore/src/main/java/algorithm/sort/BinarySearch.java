@@ -8,13 +8,10 @@ package algorithm.sort;
  */
 public class BinarySearch {
     public static int binarySearch(int[] arr, int target) {
+        int result = -1;
         //空
         if (null == arr || arr.length < 1) {
-            return -1;
-        }
-        //第一个元素
-        if (arr.length == 1 && arr[0] == target) {
-            return 0;
+            return result;
         }
         int low = 0;
         int high = arr.length - 1;
@@ -29,13 +26,20 @@ public class BinarySearch {
                 high = middle - 1;
             }
         }
-        return -1;
+        return result;
     }
 
     public static void main(String[] args) {
         int target1 = 4;
         int[] arr1 = {1, 4, 8, 12, 16};
         System.out.println(binarySearch(arr1, target1));
+        arr1 = null;
+        System.out.println(binarySearch(arr1, target1));
+        arr1 = new int[4];
+        System.out.println(binarySearch(arr1, target1));
+
+        int[] arrX = {4};
+        System.out.println(binarySearch(arrX, target1));
 
         int target2 = Integer.MAX_VALUE - 2;
         int[] arr2 = {Integer.MAX_VALUE - 3, Integer.MAX_VALUE - 2, Integer.MAX_VALUE - 1, Integer.MAX_VALUE};

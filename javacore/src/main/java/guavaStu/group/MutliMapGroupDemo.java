@@ -1,12 +1,9 @@
 package guavaStu.group;
 
 import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.util.List;
 
 /**
  * Guava 之 Multimap 进行分组
@@ -22,7 +19,7 @@ public class MutliMapGroupDemo {
             int d = i % 2;
             myMultimap.put(d, new Aoo(d, "name" + i));
         }
-        
+
         myMultimap.keySet().forEach(key -> {
             System.out.println(myMultimap.get(key));
         });

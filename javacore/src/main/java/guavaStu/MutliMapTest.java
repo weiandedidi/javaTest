@@ -50,6 +50,5 @@ public class MutliMapTest {
         System.out.println(myMultimap.get("Fruits")); // [] (Empty Collection!)
 
 
-
     }
 }

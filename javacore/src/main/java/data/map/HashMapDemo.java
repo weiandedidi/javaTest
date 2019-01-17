@@ -1,9 +1,6 @@
 package data.map;
 
 import com.google.common.collect.Maps;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.util.Map;
 import java.util.Objects;

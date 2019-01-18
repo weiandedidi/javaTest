@@ -22,3 +22,28 @@ fair和unFair见可重入锁的ReentrantLock 的 公平获取和非公平获取
 ## 分布式锁
 
 使用zookeeper进行锁
+
+
+```java
+    /**
+     * 不可重入锁 Shared Lock
+     * http://curator.apache.org/curator-recipes/shared-lock.html
+     */
+    private final InterProcessSemaphoreMutex lock;
+    /**
+     * 可重入读写锁 Shared Reentrant Read Write Lock
+     * http://curator.apache.org/curator-recipes/shared-reentrant-read-write-lock.html
+     */
+    private final InterProcessReadWriteLock lock;
+    /**
+     * 共享信号量 Shared Semaphore
+     */
+    private final InterProcessSemaphoreV2 lock;
+    /**
+     * 多共享锁 Multi Shared Lock
+     */
+    private final InterProcessMultiLock lock;
+```
+
+[分布式锁使用](https://blog.csdn.net/qq_34021712/article/details/82878396)
+

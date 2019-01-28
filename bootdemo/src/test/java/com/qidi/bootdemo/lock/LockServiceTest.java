@@ -9,8 +9,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.*;
-
 /**
  * tryLock(long waitTime, long leaseTime, TimeUnit unit) 是不可重入的锁
  *

@@ -3,6 +3,7 @@ package guavaStu.group;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,9 @@ public class GroupByDemo {
         System.out.println(list);
         Map<Integer, List<Aoo>> map = list.stream().collect(Collectors.groupingBy(Aoo::getId));
         System.out.println(map);
+
+        List<Integer> ids = list.stream().map(Aoo::getId).collect(Collectors.toList());
+        System.out.println(ids);
     }
 
     @Data
@@ -36,4 +40,5 @@ public class GroupByDemo {
         private int id;
         private String name;
     }
+
 }

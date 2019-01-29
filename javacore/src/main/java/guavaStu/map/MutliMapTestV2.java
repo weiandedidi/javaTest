@@ -1,4 +1,4 @@
-package guavaStu;
+package guavaStu.map;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;

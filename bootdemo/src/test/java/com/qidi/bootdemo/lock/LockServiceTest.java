@@ -1,5 +1,6 @@
 package com.qidi.bootdemo.lock;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.redisson.api.RLock;
@@ -23,6 +24,7 @@ public class LockServiceTest {
     LockService lockService;
 
     @Test
+    @Ignore
     public void getLock() throws InterruptedException {
         int userId = 2;
         String key = "service";

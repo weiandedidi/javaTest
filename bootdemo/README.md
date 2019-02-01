@@ -70,5 +70,5 @@ spring.redis.redisson.config=classpath:redisson/redisson.yaml
 
 ### 3.详细使用见
 
-`com.qidi.bootdemo.lock.LockService`分布式锁
+`com.qidi.bootdemo.lock.LockService`[分布式锁](https://github.com/weiandedidi/javaStu/raw/master/bootdemo/src/main/java/com/qidi/bootdemo/lock/LockService.java)
 

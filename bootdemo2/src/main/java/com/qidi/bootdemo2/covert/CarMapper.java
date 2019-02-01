@@ -22,6 +22,6 @@ public interface CarMapper {
             @Mapping(source = "model", target = "modelDto"),
             @Mapping(source = "brand", target = "brandDto")
     })
-    public CarDto carToCarDto(Car car);
+    CarDto carToCarDto(Car car);
 
 }

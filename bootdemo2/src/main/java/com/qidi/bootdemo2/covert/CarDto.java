@@ -1,4 +1,4 @@
-package com.qidi.bootdemo.mapper;
+package com.qidi.bootdemo2.covert;
 
 import lombok.Data;
 

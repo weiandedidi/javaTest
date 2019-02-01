@@ -1,4 +1,5 @@
-package com.qidi.bootdemo.mapper;
+package com.qidi.bootdemo2.covert;
+
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

@@ -6,6 +6,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 /**
  * 设置组件模型为Spring
  *
@@ -23,5 +25,7 @@ public interface CarMapper {
             @Mapping(source = "brand", target = "brandDto")
     })
     CarDto carToCarDto(Car car);
+
+    List<CarDto> carsToCarDtoList(List<Car> cars);
 
 }

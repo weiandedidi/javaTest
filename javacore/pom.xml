@@ -132,7 +132,7 @@
             <version>1.2.25</version>
         </dependency>
         <!-- json end -->
-        <!-- pic begin -->
+        <!-- pic begin 生成缩略图 -->
         <dependency>
             <groupId>net.coobird</groupId>
             <artifactId>thumbnailator</artifactId>

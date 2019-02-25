@@ -35,6 +35,9 @@ public class ListSum {
 
         //reduce 要求参数是非空的
         aoos = Lists.newArrayList(new Aoo("1", null), new Aoo("2", null), new Aoo("3", null));
+        //元素
+        System.out.println(aoos.stream().map(Aoo::getAge).collect(Collectors.toList()));
+
         sum = Optional.ofNullable(aoos.stream().map(Aoo::getAge).reduce(0, Integer::sum));
         System.out.println(sum);
 

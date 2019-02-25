@@ -1,4 +1,4 @@
-package lamada;
+package lamada.collection;
 
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;

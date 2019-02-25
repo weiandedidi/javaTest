@@ -1,4 +1,4 @@
-package guavaStu.group;
+package lamada;
 
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;

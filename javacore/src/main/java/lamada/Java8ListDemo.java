@@ -1,4 +1,4 @@
-package guavaStu.list;
+package lamada;
 
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  * 获取list中某属性
  * 方法一：
  * List<Integer> id = aoos.stream().map(Aoo::getId).collect(Collectors.toList());
- * 方法二：（list不会元素个数不会变化了）
+ * 方法二：（list元素个数不会变化了，才能使用此方法）
  * List<Integer> ids = Lists.transform(aoos, Aoo::getId);
  *
  * @author qidi

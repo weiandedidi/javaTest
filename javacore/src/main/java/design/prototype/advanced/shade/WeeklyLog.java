@@ -4,7 +4,7 @@ package design.prototype.advanced.shade;
  * 浅克隆，克隆对象中的基本属性（基本类型）实现克隆
  * 属性中的应用对象，克隆引用的地址，对象还是一个
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/10/19
  * Time: 11:39
  */

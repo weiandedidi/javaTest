@@ -5,7 +5,7 @@ package design.singleton;
  * 需要注意的是，如果使用双重检查锁定来实现懒汉式单例类，需要在静态成员变量instance之前增加修饰符volatile，
  * 被volatile修饰的成员变量可以确保多个线程都能够正确处理，且该代码只能在JDK 1.5及以上版本中才能正确执行
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/10/18
  * Time: 11:43
  */

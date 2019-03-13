@@ -2,7 +2,7 @@ package design.prototype.appDemo;
 
 /**
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/10/20
  * Time: 19:10
  */

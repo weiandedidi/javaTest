@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * <p>
  * 使用二维数组标定边
  * <p>
- * User: qidima
+ * @author maqidi
  * Date: 2018/4/25
  * Time: 下午8:28
  */

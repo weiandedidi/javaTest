@@ -4,7 +4,7 @@ package design.singleton.demoFirst;
  * 测试代码
  * 创建四个LoadBalancer对象
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/10/10
  * Time: 17:27
  */

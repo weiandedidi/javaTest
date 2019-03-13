@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * 操作xml的工具类，方便用户配置
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/10/10
  * Time: 9:51
  */

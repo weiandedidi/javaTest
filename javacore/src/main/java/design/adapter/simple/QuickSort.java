@@ -3,7 +3,7 @@ package design.adapter.simple;
 /**
  * 快速排序适配者
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/10/31
  * Time: 16:43
  */

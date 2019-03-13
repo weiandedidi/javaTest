@@ -5,7 +5,7 @@ import design.prototype.advanced.deepClone.bySerialization.WeeklyLog;
 
 /**
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/10/19
  * Time: 13:10
  */

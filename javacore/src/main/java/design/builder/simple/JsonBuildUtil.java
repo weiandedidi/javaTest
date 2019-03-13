@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * 配置json操作工具类
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/10/30
  * Time: 17:16
  */

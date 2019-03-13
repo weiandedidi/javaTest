@@ -2,7 +2,7 @@ package constant;
 
 /**
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2018/1/15
  * Time: 下午8:46
  */

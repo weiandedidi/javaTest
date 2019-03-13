@@ -2,7 +2,7 @@ package design.factory.abstractFactory;
 
 /**
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/9/26
  * Time: 下午9:45
  */

@@ -2,7 +2,7 @@ package design.builder.simple;
 
 /**
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/10/30
  * Time: 17:04
  */

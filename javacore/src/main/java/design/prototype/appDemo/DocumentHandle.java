@@ -10,7 +10,7 @@ import java.util.List;
  * 通过hashtable存储各种document模版类，完成克隆
  * <p>
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/10/20
  * Time: 18:36
  */

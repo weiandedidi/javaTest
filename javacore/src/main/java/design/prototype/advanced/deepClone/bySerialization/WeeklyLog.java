@@ -11,7 +11,7 @@ import java.io.*;
  * 明显的spring的entry对象必须实现Serializable接口，使用的是深度clone
  * 这样做的前提是对象以及对象内部所有引用到的对象都是可串行化的，否则，就需要仔细考察那些不可串行化的对象可否设成transient，从而将之排除在复制过程之外。
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/10/19
  * Time: 11:49
  */

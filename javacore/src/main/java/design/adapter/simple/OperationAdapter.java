@@ -3,7 +3,7 @@ package design.adapter.simple;
 /**
  * 操作适配器：适配器
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/10/31
  * Time: 16:42
  */

@@ -4,7 +4,7 @@ package design.singleton;
  *  *
 
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/10/10
  * Time: 19:18
  */

@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 /**
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/8/16
  * Time: 9:44
  */

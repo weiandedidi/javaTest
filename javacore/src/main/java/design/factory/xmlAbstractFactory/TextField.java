@@ -3,7 +3,7 @@ package design.factory.xmlAbstractFactory;
 /**
  * 文本框
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/10/9
  * Time: 17:54
  */

@@ -2,7 +2,7 @@ package thead;
 
 /**
  * 移位运算
- * User: qidima
+ * @author maqidi
  * Date: 2018/5/29
  * Time: 下午9:40
  */

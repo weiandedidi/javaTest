@@ -7,7 +7,7 @@ import java.util.Random;
 /**
  * 将负载均衡器LoadBalancer设计为单例类
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/10/10
  * Time: 17:19
  */

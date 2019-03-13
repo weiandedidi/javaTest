@@ -25,7 +25,7 @@ import java.util.Date;
  * ②继承自java.lang.Object类的clone()方法是浅复制。以下代码可以证明之。
  * <p>
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/10/19
  * Time: 10:06
  */

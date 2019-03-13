@@ -3,7 +3,7 @@ package design.builder.xmlSimple;
 /**
  * 控制类
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/10/31
  * Time: 15:02
  */

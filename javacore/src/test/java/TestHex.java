@@ -1,6 +1,7 @@
 /**
- * Created with IntelliJ IDEA.
- * User: qidima
+ * 测试16进制
+ *
+ * @author maqidi
  * Date: 2018/7/11
  * Time: 下午4:29
  */

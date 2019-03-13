@@ -9,7 +9,7 @@ package algorithm.sort.quick;
  * 3.递归
  * 此方法只能是使用最左侧的元素作为基准
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/11/1
  * Time: 10:45
  */

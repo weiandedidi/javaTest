@@ -4,7 +4,7 @@ package design.adapter.simple;
  * ���ֲ���������
  * ���ַ��ʺ���������
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/10/31
  * Time: 16:43
  */

@@ -3,7 +3,7 @@ package design.singleton;
 /**
  * 懒汉模式，要的时候再给
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/10/10
  * Time: 19:18
  */

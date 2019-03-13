@@ -2,7 +2,7 @@ package design.factory.abstactFactory;
 
 /**
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/9/26
  * Time: 15:49
  */

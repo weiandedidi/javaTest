@@ -8,7 +8,7 @@ import java.util.Map;
  * 使用类反射机制解决 增加一个产品时，都需要增加一个对象实现工厂的缺点
  * 使用泛型
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/9/22
  * Time: 13:04
  */

@@ -4,7 +4,7 @@ package design.builder.simple;
  * 指挥者类ActorController定义了construct()方法，该方法拥有一个抽象建造者ActorBuilder类型的参数，在该方法内部实现了游戏角色对象的逐步构建
  * 制定实例化那种构建者
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/10/30
  * Time: 17:11
  */

@@ -2,7 +2,7 @@ package design.prototype.advanced.shade;
 
 /**
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/10/19
  * Time: 11:44
  */

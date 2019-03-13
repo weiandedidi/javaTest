@@ -3,7 +3,7 @@ package design.factory.reflectionFactory;
 /**
 ` * car 抽象产品类，定义获取产品
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/9/22
  * Time: 13:05
  */

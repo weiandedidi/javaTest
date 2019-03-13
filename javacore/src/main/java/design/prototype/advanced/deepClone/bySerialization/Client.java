@@ -2,7 +2,7 @@ package design.prototype.advanced.deepClone.bySerialization;
 
 /**
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/10/19
  * Time: 13:10
  */

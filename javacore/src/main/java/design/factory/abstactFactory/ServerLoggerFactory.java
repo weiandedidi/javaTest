@@ -3,7 +3,7 @@ package design.factory.abstactFactory;
 /**
  * 服务器日志工厂
  * Created with IntelliJ IDEA.
- * User: qidima
+ * @author maqidi
  * Date: 2017/10/9
  * Time: 15:59
  */

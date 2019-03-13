@@ -9,9 +9,9 @@ package sup;
  */
 public class Client {
     public static void main(String[] args) {
-        Foo a, b;
+        Foo a;
         Aoo aoo;
-        aoo =  new Aoo("Aoo");
+        aoo = new Aoo("Aoo");
         a = new SubFoo(aoo);
         a.show();
     }

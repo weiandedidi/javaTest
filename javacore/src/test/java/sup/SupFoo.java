@@ -12,7 +12,7 @@ public class SupFoo extends Foo{
 
     public SupFoo(Foo foo) {
         this.foo = foo;
-        System.out.println("父类方法");
+        System.out.println("父类构造方法");
     }
 
     @Override

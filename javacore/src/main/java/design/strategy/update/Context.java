@@ -1,7 +1,5 @@
 package design.strategy.update;
 
-import java.util.HashMap;
-
 /**
  * 注册策略的环境控制
  * 共享策略模式
@@ -11,18 +9,13 @@ import java.util.HashMap;
  * Time: 10:58
  */
 public class Context {
-    private static HashMap<Object, IStrategy> strategyMap = new HashMap<Object, IStrategy>();
+    private CustomerStrategy customerStrategy;
 
-    public static IStrategy getStratgy(Object key) {
-        return strategyMap.get(key);
+    public double discount(double price) {
+        return customerStrategy.calculate(price);
     }
 
-    public static void addStrategyMap(Object key, IStrategy strategy) {
-        strategyMap.put(key, strategy);
-    }
-
-    //使用方法
-    public static void operation(Object key){
-        strategyMap.get(key).operation();
+    public Context(CustomerStrategy customerStrategy) {
+        this.customerStrategy = customerStrategy;
     }
 }

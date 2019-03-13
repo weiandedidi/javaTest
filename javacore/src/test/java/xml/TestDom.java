@@ -71,7 +71,7 @@ public class TestDom {
     }
 
     public static void main(String[] args) throws DocumentException {
-        String path = "D:\\work\\javaTest\\wms\\src\\test\\java\\xml\\employee.xml";
+        String path = "employee.xml";
         Document document = getDomByPath(path);
         Element root = readRoot(document);
         List<Element> elements = getElementsByName(root,"emp");

@@ -6,6 +6,8 @@ import java.util.List;
 
 /**
  * Created by qidima on 2017/7/3.
+ *
+ * @author qidi
  */
 public class TestDecimal {
     public static void main(String[] args) {
@@ -17,7 +19,7 @@ public class TestDecimal {
         BigDecimal big = new BigDecimal(12.41);
 
 
-        //jiequ
+        //取整数
         List<Integer> integers = new ArrayList<Integer>();
         integers.add(1);
         integers.add(1);
@@ -37,8 +39,8 @@ public class TestDecimal {
         String xxxStr = dec.format(3.555);
 
         System.out.println(new BigDecimal(xxxStr).setScale(2, RoundingMode.HALF_DOWN));
-        System.out.println(2/9);
-        System.out.println((double) 2/9*100);
+        System.out.println(2 / 9);
+        System.out.println((double) 2 / 9 * 100);
         System.out.println(new BigDecimal((double) 2 / 9 * 100).setScale(2, RoundingMode.HALF_UP));
         System.out.println("=======");
         System.out.println(new Long(5L).toString());

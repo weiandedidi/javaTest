@@ -73,6 +73,13 @@
             <version>3.2.2</version>
         </dependency>
 
+        <!--netty的所有包-->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.31.Final</version>
+        </dependency>
+
     </dependencies>
 
     <build>

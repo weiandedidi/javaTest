@@ -52,6 +52,7 @@ public class HttpServer {
                         });
         // determining the number of connections queued
         bootstrap.option(ChannelOption.SO_BACKLOG, 128);
+        //保持长链接的设置项
         bootstrap.childOption(ChannelOption.SO_KEEPALIVE, Boolean.TRUE);
         bootstrap.bind(port).sync();
     }

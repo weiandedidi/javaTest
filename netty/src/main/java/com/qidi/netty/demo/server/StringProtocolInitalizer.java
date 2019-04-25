@@ -11,6 +11,7 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.util.CharsetUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -31,31 +32,31 @@ public class StringProtocolInitalizer extends ChannelInitializer<SocketChannel> 
     @Autowired
     StringEncoder stringEncoder;
 
+    @Value("${message.length}")
+    private int length;
+
 
     @Override
     protected void initChannel(SocketChannel socketChannel) throws Exception {
 
         ChannelPipeline pipeline = socketChannel.pipeline();
 
-        //创建ssl单向验证服务
+//        创建ssl单向验证服务
 //        SSLEngine engine = factory.getServerContext(path).createSSLEngine();
-        //设置为服务器模式
-//        engine.setUseClientMode(false);
+//        engine.setUseClientMode(false);      //设置为服务器模式
+//        pipeline.addLast("ssl", new SslHandler(engine));
 
-        //分隔符 拆包不能单例
+//        分隔符 拆包不能单例
         String delimiter = "$$";
-        int length = 40960;
         ByteBuf byteBuf = Unpooled.copiedBuffer(delimiter, CharsetUtil.UTF_8);
         pipeline.addLast("framer", new DelimiterBasedFrameDecoder(length, byteBuf));
 
-        //ssl
-//        pipeline.addLast("ssl", new SslHandler(engine));
-
+        //编码是@Sharable 随意可以注入当成单例使用
         pipeline.addLast("decoder", stringDecoder);
         pipeline.addLast("encoder", stringEncoder);
-        //消息处理 这里不能是单例的
+
+        //消息处理 如果不是全局的统计，不能使用单例的，因为客户端断了重连会爆 is not a @Sharable handler错误
         pipeline.addLast(new DispatcherHandler());
-        //TODO 加入ssl的加密
     }
 
 }

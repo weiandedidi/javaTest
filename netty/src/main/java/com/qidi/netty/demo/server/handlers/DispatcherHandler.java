@@ -33,7 +33,7 @@ public class DispatcherHandler extends HeartBeatHandler {
         //回复报文
         Channel channel = channelHandlerContext.channel();
         //协定报文分隔符
-        ChannelFuture channelFuture = channel.writeAndFlush(data + "$$");
+        ChannelFuture channelFuture = channel.writeAndFlush(data + "\r\n" + "$$");
         try {
             channelFuture = channelFuture.sync();
         } catch (InterruptedException e) {

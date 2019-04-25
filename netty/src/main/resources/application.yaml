@@ -3,15 +3,18 @@
 tcp:
   port: 8090
 # bossGroup的线程数
-boss:
+parent:
   thread:
     count: 2
 # worker的线程数
-worker:
+child:
   thread:
     count: 2
 #是否使用长连接
 so:
   keepalive:  true
   backlog: 100
+
+message:
+  length: 40960
 

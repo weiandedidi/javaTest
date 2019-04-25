@@ -37,6 +37,7 @@
         <module>springdemo</module>
         <module>javacore</module>
         <module>bootdemo</module>
+        <module>netty</module>
     </modules>
     <groupId>com.qidi</groupId>
     <artifactId>javaStu</artifactId>

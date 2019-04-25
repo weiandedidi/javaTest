@@ -83,6 +83,14 @@ public abstract class HeartBeatHandler extends ChannelInboundHandlerAdapter {
      */
     protected abstract void handleData(ChannelHandlerContext channelHandlerContext, Object msg);
 
+    /**
+     * 监控空闲时候动作
+     * 读空闲，发心跳
+     *
+     * @param ctx
+     * @param evt
+     * @throws Exception
+     */
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
 

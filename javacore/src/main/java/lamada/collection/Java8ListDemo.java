@@ -27,6 +27,9 @@ public class Java8ListDemo {
         List<Integer> idList = aoos.stream().map(Aoo::getId).collect(Collectors.toList());
         System.out.println(idList);
 
+        List<String> idStrList = aoos.stream().map(s -> s.getId().toString()).collect(Collectors.toList());
+        System.out.println(idStrList.get(0).getClass() + "---" + idList);
+
         //切记，一单list中的元素发生变化的时候，使用transform会使用变化后的集合
         List<Integer> ids = Lists.transform(aoos, Aoo::getId);
         aoos.add(new Aoo(4, 15));

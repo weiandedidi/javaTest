@@ -1,4 +1,4 @@
-package java8.lamada;
+package java8.lamada.grammer;
 
 import com.google.common.collect.Lists;
 
@@ -17,7 +17,8 @@ import java.util.List;
 public class OptionalDemo {
     public static void main(String[] args) {
         List<Integer> ids = Lists.newArrayList();
-        Integer id = ids.stream().findFirst().orElse(3);
+        //存在返回1，不存在返回orElse的值
+        Integer id = ids.stream().findFirst().orElse(0);
         System.out.println(id);
     }
 

@@ -13,7 +13,7 @@ public class ConverterDemo {
     public static void main(String[] args) {
         //传入lamda的参数，之后不能修改，因为lamda是后解析的，所以导致传入lamda的参数不知道
          int num = 1;
-        Converter<Integer, String> s = (param) -> param + num;
+        Converter<Integer> s = (param) -> param + num;
         //结果3
         int x = s.convert(2);
         System.out.println(x);
@@ -21,7 +21,7 @@ public class ConverterDemo {
 
     }
 
-    public interface Converter<T1, T2> {
+    public interface Converter<T> {
         int convert(int i);
     }
 }

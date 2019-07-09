@@ -1,4 +1,4 @@
-package lamada;
+package java8.lamada;
 
 /**
  * lamada表达式作用域

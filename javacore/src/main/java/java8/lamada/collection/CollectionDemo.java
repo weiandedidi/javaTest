@@ -1,4 +1,4 @@
-package lamada.collection;
+package java8.lamada.collection;
 
 import com.google.common.collect.Lists;
 import lombok.Data;

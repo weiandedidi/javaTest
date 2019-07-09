@@ -1,4 +1,4 @@
-package lamada;
+package java8.lamada;
 
 import com.google.common.collect.Lists;
 

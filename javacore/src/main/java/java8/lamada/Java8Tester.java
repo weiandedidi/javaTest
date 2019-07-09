@@ -1,4 +1,4 @@
-package lamada;
+package java8.lamada;
 
 /**
  * lambda 表达式的语法格式如下：

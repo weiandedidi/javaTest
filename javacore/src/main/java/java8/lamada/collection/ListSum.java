@@ -1,7 +1,6 @@
-package lamada.collection;
+package java8.lamada.collection;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

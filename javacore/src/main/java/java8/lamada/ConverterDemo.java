@@ -1,4 +1,4 @@
-package lamada;
+package java8.lamada;
 
 /**
  * 直接在 lambda 表达式中访问外层的局部变量

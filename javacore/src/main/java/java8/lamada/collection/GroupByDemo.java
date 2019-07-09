@@ -1,9 +1,8 @@
-package lamada.collection;
+package java8.lamada.collection;
 
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.apache.commons.lang.StringUtils;
 
 import java.util.List;
 import java.util.Map;

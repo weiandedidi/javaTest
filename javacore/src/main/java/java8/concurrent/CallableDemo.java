@@ -9,6 +9,7 @@ import java.util.concurrent.Callable;
 
 /**
  * callable的方法
+ *
  * @author qidi
  * @date 2019-07-09 17:13
  */
@@ -40,10 +41,9 @@ public class CallableDemo {
     }
 
     public static Integer getId(Aoo aoo) {
-        Preconditions.checkNotNull(aoo.getId(), "id不能为空");
+        Preconditions.checkArgument(null != aoo.getId(), "id不能为空");
         return aoo.getId();
     }
-
 
 
     @Data

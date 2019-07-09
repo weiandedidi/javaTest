@@ -19,7 +19,7 @@ public class ScopeDemo {
         int a = 6;
         MathOperation mathOperation = (b) -> b + a;
         System.out.println(mathOperation.plus(4));
-        a = 3;
+//        a = 3;
 
     }
 

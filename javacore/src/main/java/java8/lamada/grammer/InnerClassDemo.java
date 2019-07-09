@@ -11,7 +11,7 @@ public class InnerClassDemo {
     public static void main(String[] args) {
 
         int a = 5;
-        a = 6;
+//        a = 6;
         ScopeDemo.MathOperation mathOperation = new ScopeDemo.MathOperation() {
             @Override
             public int plus(int b) {

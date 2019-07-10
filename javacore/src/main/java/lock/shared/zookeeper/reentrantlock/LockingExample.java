@@ -18,7 +18,9 @@ import java.util.concurrent.TimeUnit;
  * @date 2019-01-18 15:23
  */
 public class LockingExample {
-
+    /**
+     * 线程数
+     */
     private static final int QTY = 5;
     private static final int REPETITIONS = QTY * 10;
     private static final String CONNECTION_STRING = "172.18.83.167:2181";
@@ -35,29 +37,26 @@ public class LockingExample {
             for (int i = 0; i < QTY; ++i) {
                 final int index = i;
 
-                Callable<Void> task = new Callable<Void>() {
-                    @Override
-                    public Void call() throws Exception {
-                        CuratorFramework client = CuratorFrameworkFactory.newClient(CONNECTION_STRING, new ExponentialBackoffRetry(1000, 3, Integer.MAX_VALUE));
+                Callable<Void> task = () -> {
+                    CuratorFramework client = CuratorFrameworkFactory.newClient(CONNECTION_STRING, new ExponentialBackoffRetry(1000, 3, Integer.MAX_VALUE));
 
-                        try {
-                            client.start();
+                    try {
+                        client.start();
 
-                            ExampleClientThatLocks example = new ExampleClientThatLocks(client, PATH, resource, "Client " + index);
-                            for (int j = 0; j < REPETITIONS; ++j) {
-                                example.doWork(10, TimeUnit.SECONDS);
-                            }
-                        } catch (InterruptedException e) {
-                            Thread.currentThread().interrupt();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            // log or do something
-                        } finally {
-                            CloseableUtils.closeQuietly(client);
+                        ExampleClientThatLocks example = new ExampleClientThatLocks(client, PATH, resource, "Client " + index);
+                        for (int j = 0; j < REPETITIONS; ++j) {
+                            example.doWork(10, TimeUnit.SECONDS);
                         }
-                        return null;
-
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        // log or do something
+                    } finally {
+                        CloseableUtils.closeQuietly(client);
                     }
+                    return null;
+
                 };
                 service.submit(task);
             }

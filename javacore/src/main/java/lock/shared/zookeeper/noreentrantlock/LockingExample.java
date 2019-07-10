@@ -35,29 +35,26 @@ public class LockingExample {
             for (int i = 0; i < QTY; ++i) {
                 final int index = i;
 
-                Callable<Void> task = new Callable<Void>() {
-                    @Override
-                    public Void call() throws Exception {
-                        CuratorFramework client = CuratorFrameworkFactory.newClient(CONNECTION_STRING, new ExponentialBackoffRetry(1000, 3, Integer.MAX_VALUE));
+                Callable<Void> task = () -> {
+                    CuratorFramework client = CuratorFrameworkFactory.newClient(CONNECTION_STRING, new ExponentialBackoffRetry(1000, 3, Integer.MAX_VALUE));
 
-                        try {
-                            client.start();
+                    try {
+                        client.start();
 
-                            ExampleClientNotReentrantLock example = new ExampleClientNotReentrantLock(client, PATH, resource, "Client " + index);
-                            for (int j = 0; j < REPETITIONS; ++j) {
-                                example.doWork(10, TimeUnit.SECONDS);
-                            }
-                        } catch (InterruptedException e) {
-                            Thread.currentThread().interrupt();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            // log or do something
-                        } finally {
-                            CloseableUtils.closeQuietly(client);
+                        ExampleClientNotReentrantLock example = new ExampleClientNotReentrantLock(client, PATH, resource, "Client " + index);
+                        for (int j = 0; j < REPETITIONS; ++j) {
+                            example.doWork(10, TimeUnit.SECONDS);
                         }
-                        return null;
-
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        // log or do something
+                    } finally {
+                        CloseableUtils.closeQuietly(client);
                     }
+                    return null;
+
                 };
                 service.submit(task);
             }

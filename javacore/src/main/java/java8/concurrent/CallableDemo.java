@@ -18,7 +18,9 @@ public class CallableDemo {
 
     public static void main(String[] args) {
         Aoo aoo = new Aoo("aoo", null);
+        //做一些校验工作。
         invoke(() -> getId(aoo));
+        System.out.println("asfads");
     }
 
     /**

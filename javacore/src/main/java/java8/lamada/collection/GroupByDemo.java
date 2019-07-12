@@ -22,7 +22,7 @@ public class GroupByDemo {
         List<Aoo> list = Lists.newArrayList();
         for (int i = 0; i < 10; i++) {
             int d = i % 2;
-            list.add(new Aoo(d, "name" + i));
+            list.add(new Aoo(d, "name" + i, i));
         }
         Collectors.groupingBy(Aoo::getId);
         System.out.println(list);
@@ -31,6 +31,11 @@ public class GroupByDemo {
 
         List<Integer> ids = list.stream().map(Aoo::getId).collect(Collectors.toList());
         System.out.println(ids);
+
+        //groupBy 并加和
+        Map<Integer, Integer> countMap = list.stream().collect(Collectors.groupingBy(Aoo::getId, Collectors.summingInt(a -> a.getCount())));
+        System.out.println(countMap);
+
     }
 
     @Data
@@ -38,6 +43,7 @@ public class GroupByDemo {
     static class Aoo {
         private int id;
         private String name;
+        private int count;
     }
 
 }

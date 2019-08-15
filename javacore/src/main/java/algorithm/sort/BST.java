@@ -14,16 +14,17 @@ public class BST {
     }
 
     public void find(TreeNode treeNode, int L, int R) {
-        if (null != treeNode) {
-            if (treeNode.val >= L && treeNode.val <= R) {
-                sum += treeNode.val;
-            }
-            if (treeNode.val > L) {
-                find(treeNode.left, L, R);
-            }
-            if (treeNode.val < R) {
-                find(treeNode.right, L, R);
-            }
+        if (null == treeNode) {
+            return;
+        }
+        if (treeNode.val >= L && treeNode.val <= R) {
+            sum += treeNode.val;
+        }
+        if (treeNode.val > L) {
+            find(treeNode.left, L, R);
+        }
+        if (treeNode.val < R) {
+            find(treeNode.right, L, R);
         }
     }
 }

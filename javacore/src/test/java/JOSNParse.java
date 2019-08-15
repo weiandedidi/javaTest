@@ -1,8 +1,4 @@
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.annotation.JSONField;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * @author qidi
@@ -11,18 +7,17 @@ import lombok.NoArgsConstructor;
 public class JOSNParse {
 
     public static void main(String[] args) {
-        String json = "{\"body\":{\"code\":\"0\",\"data\":\"0\",\"message\":\"success\",\"reqCode\":\"16C7147F60311SE\"},\"head\":{\"interfaceName\":\"doCharge\",\"model\":\"uwms\",\"request_id\":\"16C7147F60311SE\",\"serialNo\":\"hk01\",\"type\":\"response\",\"vendor\":\"meituan\",\"version\":\"2.2.3\"}}";
+        String json = "{\"body\":{\"code\":\"0\",\"data\":\"0\",\"message\":\"success\",\"reqCode\":\"16C73D7FBA21EEQ\"},\"head\":{\"interfaceName\":\"chargeDone\",\"model\":\"uwms\",\"request_id\":\"16C73D7FBA21EEQ\",\"serialNo\":\"hk01\",\"type\":\"response\",\"vendor\":\"meituan\",\"version\":\"2.2.3\"}}";
         AgvCommonReportDto dto = JSON.parseObject(json, AgvCommonReportDto.class);
 
-        System.out.println(dto.getBody());
+
+        System.out.println(dto.getBody().getData());
 
 
     }
 
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    static class AgvCommonBody {
+
+    static class Body {
         /**
          * 状态码
          */
@@ -34,21 +29,56 @@ public class JOSNParse {
         /**
          * 数据
          */
-        private String data;
+        private Object data;
+
+        public String getCode() {
+            return code;
+        }
+
+        public void setCode(String code) {
+            this.code = code;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        public Object getData() {
+            return data;
+        }
+
+        public void setData(Object data) {
+            this.data = data;
+        }
     }
 
 
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
+
     static class AgvCommonReportDto {
         Head head;
-        AgvCommonBody body;
+        Body body;
+
+        public Head getHead() {
+            return head;
+        }
+
+        public void setHead(Head head) {
+            this.head = head;
+        }
+
+        public Body getBody() {
+            return body;
+        }
+
+        public void setBody(Body body) {
+            this.body = body;
+        }
     }
 
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
     static class Head {
         private String type;
         /**
@@ -73,9 +103,63 @@ public class JOSNParse {
          * 系统的序列号
          */
         private String serialNo;
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        public String getVersion() {
+            return version;
+        }
+
+        public void setVersion(String version) {
+            this.version = version;
+        }
+
+        public String getInterfaceName() {
+            return interfaceName;
+        }
+
+        public void setInterfaceName(String interfaceName) {
+            this.interfaceName = interfaceName;
+        }
+
+        public String getVendor() {
+            return vendor;
+        }
+
+        public void setVendor(String vendor) {
+            this.vendor = vendor;
+        }
+
+        public String getModel() {
+            return model;
+        }
+
+        public void setModel(String model) {
+            this.model = model;
+        }
+
+        public String getSerialNo() {
+            return serialNo;
+        }
+
+        public void setSerialNo(String serialNo) {
+            this.serialNo = serialNo;
+        }
     }
-
-
 
 
 }

@@ -53,6 +53,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <!--配置库存thrift注解需要的hibernate validator-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.3.6.Final</version>
+        </dependency>
+
         <!-- google begin -->
         <dependency>
             <groupId>com.google.guava</groupId>

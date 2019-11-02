@@ -17,9 +17,10 @@ public class CallableDemo {
 
 
     public static void main(String[] args) {
-        Aoo aoo = new Aoo("aoo", null);
+        Aoo aoo = new Aoo("aoo", 12);
         //做一些校验工作。
-        invoke(() -> getId(aoo));
+        int id = invoke(() -> getId(aoo));
+        System.out.println("id 是" + id);
         System.out.println("asfads");
     }
 

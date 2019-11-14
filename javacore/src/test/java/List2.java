@@ -15,5 +15,7 @@ public class List2 {
         }
 
         System.out.println(arr[2][2]);
+
+        System.out.println("5".equalsIgnoreCase(null));
     }
 }

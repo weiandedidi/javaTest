@@ -38,6 +38,7 @@
         <module>javacore</module>
         <module>bootdemo</module>
         <module>netty</module>
+        <module>mqtt</module>
     </modules>
     <groupId>com.qidi</groupId>
     <artifactId>javaStu</artifactId>

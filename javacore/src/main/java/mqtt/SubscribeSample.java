@@ -11,8 +11,8 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
  */
 public class SubscribeSample {
     public static void main(String[] args) throws MqttException {
-        String HOST = "tcp://iot.eclipse.org:1883";
-        String TOPIC = "mqtt/test";
+        String HOST = "tcp://mqtt.eclipse.org:1883";
+        String TOPIC = "mqtt/qidi/test";
         int qos = 1;
         String clientid = "subClient";
         String userName = "test";
@@ -36,21 +36,27 @@ public class SubscribeSample {
             // 设置回调函数
             client.setCallback(new MqttCallback() {
 
+
+                @Override
                 public void connectionLost(Throwable cause) {
+                    //断开连接
                     System.out.println("connectionLost");
+
                 }
 
+                @Override
                 public void messageArrived(String topic, MqttMessage message) throws Exception {
-                    System.out.println("topic:"+topic);
-                    System.out.println("Qos:"+message.getQos());
-                    System.out.println("message content:"+new String(message.getPayload()));
-
+                    //接收到消息
+                    System.out.println("topic:" + topic);
+                    System.out.println("Qos:" + message.getQos());
+                    System.out.println("message content:" + new String(message.getPayload()));
                 }
 
+                @Override
                 public void deliveryComplete(IMqttDeliveryToken token) {
-                    System.out.println("deliveryComplete---------"+ token.isComplete());
+                    //完成传递
+                    System.out.println("deliveryComplete---------" + token.isComplete());
                 }
-
             });
             client.connect(options);
             //订阅消息

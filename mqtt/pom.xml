@@ -37,6 +37,13 @@
             <version>1.2.58</version>
         </dependency>
         <!-- json end -->
+        <!--mqtt springboot 2.0之后的支持方式-->
+        <dependency>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-mqtt</artifactId>
+            <version>5.2.1.RELEASE</version>
+        </dependency>
+         
     </dependencies>
 
 </project>

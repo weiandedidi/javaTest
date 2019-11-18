@@ -16,10 +16,10 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 public class PublishSample {
     public static void main(String[] args) {
 
-        String topic = "mqtt/test";
+        String topic = "mqtt/qidi/test";
         String content = "hello 哈哈";
         int qos = 1;
-        String broker = "tcp://iot.eclipse.org:1883";
+        String broker = "tcp://mqtt.eclipse.org:1883";
         String userName = "test";
         String password = "test";
         String clientId = "pubClient";

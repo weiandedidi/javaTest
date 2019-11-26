@@ -86,7 +86,7 @@ public class MqttManagerConfig {
     @Bean
     public MessageHandler mqttOutbound() {
         MqttPahoMessageHandler messageHandler = new MqttPahoMessageHandler(clientId, mqttClientFactory());
-        messageHandler.setAsync(true);
+        messageHandler.setAsync(true);x
         messageHandler.setDefaultTopic(defaultTopic);
         return messageHandler;
     }

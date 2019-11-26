@@ -29,7 +29,7 @@ public class FunctionUtil {
      * @return
      */
     public static <T, R> R getResult(T t, Predicate<T> predicate, Function<? super T, R> f) {
-        //人的校验成立
+        //参数校验
         if (predicate.test(t)) {
             //进行函数调用
             return f.apply(t);

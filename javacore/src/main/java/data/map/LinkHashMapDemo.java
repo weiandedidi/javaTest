@@ -6,6 +6,10 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * linkedHashMap有序
+ * 可以实现LRC 淘汰策略
+ * Least Recently Used
+ *
  * @author qidi
  * @date 2018-12-29 16:28
  */

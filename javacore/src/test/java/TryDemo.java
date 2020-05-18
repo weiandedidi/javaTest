@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * @author qidi
  * @date 2020-03-31 18:31
@@ -6,7 +8,11 @@ public class TryDemo {
 
 
     public static void main(String[] args) {
-        testTry(3);
+        Random random = new Random();
+        int type = random.nextInt(10);
+        System.out.println(type);
+//        testTry(3);
+
     }
 
     public static void testTry(int a) {
@@ -19,5 +25,8 @@ public class TryDemo {
         } finally {
             System.out.println("最新打印");
         }
+
     }
+
+
 }

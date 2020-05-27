@@ -1,5 +1,12 @@
 package thread.pool;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
+
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
 /**
  * ①newSingleThreadExecutor
  * 单个线程的线程池，即线程池中每次只有一个线程工作，单线程串行执行任务
@@ -13,7 +20,49 @@ package thread.pool;
  * ④newScheduleThreadExecutor
  * 大小无限制的线程池，支持定时和周期性的执行线程
  */
-public class MyThreadExecutor{
+public class MyThreadExecutor {
+    private static final ExecutorService executorService = new ThreadPoolExecutor(
+            5,
+            10,
+            30,
+            TimeUnit.SECONDS,
+            new ArrayBlockingQueue<>(1000),
+            new ThreadFactoryBuilder().setNameFormat("ActionThreadPool-pool-%d").build(),
+            new ThreadPoolExecutor.DiscardOldestPolicy()) {
 
+        private ThreadLocal<Long> timeThreadLocal = new ThreadLocal();
+    };
+
+    static ExecutorService getExecutor() {
+        return executorService;
+    }
+
+    public static void main(String[] args) {
+        int i = 0;
+        do {
+            i++;
+            createThread();
+            if (i == 3) {
+                Thread.currentThread().interrupt();
+            }
+        } while (i < 5);
+
+    }
+
+    public static void createThread() {
+        MyThreadExecutor.getExecutor().submit(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println(Thread.currentThread().getName());
+                }
+            }
+        });
+    }
 
 }

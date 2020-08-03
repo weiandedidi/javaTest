@@ -19,8 +19,13 @@ public class ListCopyTest {
         List<Aoo> list = Lists.newArrayList(new Aoo(1), new Aoo(2), new Aoo(3), new Aoo(4));
         List<Aoo> sub = list.stream().filter(item -> item.getAge() > 2).collect(Collectors.toList());
 
+
         System.out.println(list);
         System.out.println(sub);
+
+
+        Aoo filter = list.stream().filter(o -> o.getAge() > 10).findAny().orElse(null);
+        System.out.println(filter);
     }
 
     @AllArgsConstructor

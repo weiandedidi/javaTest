@@ -18,5 +18,13 @@ public class ApacheUtils {
 
         Map<String, Object> map = Maps.newHashMap();
         System.out.println(map.entrySet().stream().filter(o -> o.getValue().equals(1)).findFirst().orElse(null));
+        Integer a = null;
+
+        if (1 == a) {
+            System.out.println("失败");
+        } else {
+            System.out.println("成功");
+
+        }
     }
 }

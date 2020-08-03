@@ -32,6 +32,7 @@ public class MapStream {
         id2AooMap = converToMap(aooList);
 
         System.out.println(id2AooMap);
+        System.out.println(converToStringMap(aooList));
 
     }
 
@@ -39,6 +40,15 @@ public class MapStream {
         Map<Integer, Aoo> id2AooMap = Maps.newHashMap();
         if (CollectionUtils.isNotEmpty(aooList)) {
             Map<Integer, Aoo> id2AooM = aooList.stream().collect(Collectors.toMap(Aoo::getId, a -> a, (k1, k2) -> k1));
+            id2AooMap.putAll(id2AooM);
+        }
+        return id2AooMap;
+    }
+
+    private static Map<Integer, String> converToStringMap(List<Aoo> aooList) {
+        Map<Integer, String> id2AooMap = Maps.newHashMap();
+        if (CollectionUtils.isNotEmpty(aooList)) {
+            Map<Integer, String> id2AooM = aooList.stream().collect(Collectors.toMap(Aoo::getId, a -> a.getName(), (k1, k2) -> k1));
             id2AooMap.putAll(id2AooM);
         }
         return id2AooMap;

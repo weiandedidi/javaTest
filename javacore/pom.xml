@@ -168,7 +168,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>RELEASE</version>
+            <version>4.13.1</version>
         </dependency>
         <!--curator操作zookeeper的工具 建议使用2.13版本，curator4.0需要3.5的zookeeper这个不稳定-->
         <dependency>
